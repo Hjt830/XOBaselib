@@ -20,7 +20,7 @@ PODS:
     - SDWebImage/Core (= 5.0.6)
   - SDWebImage/Core (5.0.6)
   - SVProgressHUD (2.2.5)
-  - XOBaseLib (0.0.5):
+  - XOBaseLib (0.0.6):
     - AFNetworking (~> 3.2.1)
     - GTMBase64 (~> 1.0.1)
     - MJRefresh (~> 3.2.0)
@@ -53,7 +53,7 @@ SPEC CHECKSUMS:
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
   SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  XOBaseLib: 189a3cc0e9f4a2e6bf6c7ad181427aa5464bb546
+  XOBaseLib: 1f2222d239341c861e3b45640159c0234e07e35e
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
 PODFILE CHECKSUM: f5e900e82195e93b86a2eae979d0af4b0c9024e6
