@@ -16,7 +16,7 @@
 #import <SDWebImage/SDImageCache.h>
 #import <SDWebImage/SDWebImageDownloader.h>
 #import <SDWebImage/UIImageView+WebCache.h>
-#import <YYModel/YYModel.h>
+#import <YYKit/YYKit.h>
 #import <MJRefresh/MJRefresh.h>
 
 // 配置参数
