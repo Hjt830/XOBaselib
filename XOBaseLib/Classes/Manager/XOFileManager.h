@@ -148,6 +148,22 @@ FOUNDATION_STATIC_INLINE NSString * XOMsgMimeName(enum XOMsgFileType msgType) {
 
 @interface XOFileManager : NSObject
 
++ (instancetype)shareInstance;
+
+/**
+ *  @brief 根据原图获取聊天页缩略图尺寸
+ *  @param originImage 原图
+ *  @return 返回缩略图尺寸
+ */
+- (CGSize)getScaleImageSize:(UIImage *)originImage;
+
+/**
+ *  @brief 根据原图获取缩略图
+ *  @param originImage 原图
+ *  @param scaleSize 缩略图尺寸
+ */
+- (UIImage *)scaleOriginImage:(UIImage *)originImage toSize:(CGSize)scaleSize;
+
 @end
 
 NS_ASSUME_NONNULL_END
