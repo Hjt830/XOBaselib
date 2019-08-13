@@ -65,9 +65,9 @@ static XOFileManager * __manager = nil;
  */
 - (UIImage *)scaleOriginImage:(UIImage *)originImage toSize:(CGSize)scaleSize
 {
-    if (image.size.width > size.width) {
-        UIGraphicsBeginImageContext(size);
-        [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    if (originImage.size.width > scaleSize.width) {
+        UIGraphicsBeginImageContext(scaleSize);
+        [originImage drawInRect:CGRectMake(0, 0, scaleSize.width, scaleSize.height)];
         UIImage *scaleImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         return scaleImage;
