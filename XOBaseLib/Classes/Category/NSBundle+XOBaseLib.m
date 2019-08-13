@@ -25,6 +25,7 @@
     NSBundle *bundle = [NSBundle xo_baseLibBundle];
     NSURL *url = [bundle URLForResource:@"XOBaseLib" withExtension:@"bundle"];
     bundle = [NSBundle bundleWithURL:url];
+    return bundle;
 }
 
 + (NSString *)xo_localizedStringForKey:(NSString *)key value:(NSString *)value
