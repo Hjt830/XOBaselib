@@ -22,7 +22,7 @@ typedef NS_ENUM(NSUInteger, HTSMSCodeType) {
     HTSMSCodeTypeReset  = 102,  // 重置密码验证码
 };
 
-@class JTSMSCodeModel;
+@class XOSMSCodeModel;
 @interface XOSmsCodeManager : NSObject
 
 + (instancetype _Nonnull )defaultManager;
@@ -30,19 +30,19 @@ typedef NS_ENUM(NSUInteger, HTSMSCodeType) {
 /** @brief 保存验证码
  *  @param smsCode 要保存的验证码数据
  */
-- (void)saveSmsCode:(JTSMSCodeModel * _Nonnull)smsCode;
+- (void)saveSmsCode:(XOSMSCodeModel * _Nonnull)smsCode;
 
 /** @brief 根据类型获取验证码数据
  *  @param smsCodeType 要获取的验证码数据的类型
  */
-- (JTSMSCodeModel * _Nullable)getSmsCode:(HTSMSCodeType)smsCodeType;
+- (XOSMSCodeModel * _Nullable)getSmsCode:(HTSMSCodeType)smsCodeType;
 
 @end
 
 
 
 
-@interface JTSMSCodeModel : NSObject
+@interface XOSMSCodeModel : NSObject
 
 // 验证码类型
 @property (nonatomic, assign) HTSMSCodeType         codeType;

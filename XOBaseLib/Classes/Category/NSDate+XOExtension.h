@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 #define D_WEEK          604800
 #define D_YEAR          31556926
 
-@interface NSDate (JTExtension)
+@interface NSDate (XOExtension)
 
 - (NSString *)timeIntervalDescription;
 - (NSString *)minuteDescription;

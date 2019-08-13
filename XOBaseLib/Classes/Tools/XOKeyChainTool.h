@@ -13,13 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 /************** 一些机密数据存储key ***************/
 
 // App的token存储key
-extern NSString * const JTAppAuthorTokenKey;
+extern NSString * const XOAppAuthorTokenKey;
 
 // App登录用户名(手机号码/邮箱)存储key
-extern NSString * const JTAppLoginUserName;
+extern NSString * const XOAppLoginUserName;
 
 // App登录密码存储key
-extern NSString * const JTAppLoginPassWord;
+extern NSString * const XOAppLoginPassWord;
 
 /********************* end ********************/
 

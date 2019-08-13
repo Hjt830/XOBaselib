@@ -182,7 +182,7 @@
     return 0;
 }
 
-- (void)refreshByGenralSettingChange:(JTGenralChangeType)genralType userInfo:(NSDictionary *)userInfo
+- (void)refreshByGenralSettingChange:(XOGenralChangeType)genralType userInfo:(NSDictionary *)userInfo
 {
     if (_tableView) {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{

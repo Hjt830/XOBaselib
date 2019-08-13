@@ -1,5 +1,5 @@
 //
-//  NSDate+JTExtension.m
+//  NSDate+XOExtension.m
 //  XOBaseLib
 //
 //  Created by kenter on 2019/8/13.
@@ -14,7 +14,7 @@
 #define DATE_COMPONENTS (NSCalendarUnitYear| NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekOfYear |  NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitWeekday | NSCalendarUnitWeekdayOrdinal)
 #define CURRENT_CALENDAR [NSCalendar currentCalendar]
 
-@implementation NSDate (JTExtension)
+@implementation NSDate (XOExtension)
 
 - (NSString *)timeIntervalDescription
 {

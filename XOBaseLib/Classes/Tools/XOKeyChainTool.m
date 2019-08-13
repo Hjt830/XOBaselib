@@ -12,17 +12,17 @@
 #import "NSString+XOExtension.h"
 
 // App的token存储key
-NSString * const JTAppAuthorTokenKey = @"xoKeyChain_AppAuthorTokenKey";
+NSString * const XOAppAuthorTokenKey = @"xoKeyChain_AppAuthorTokenKey";
 
 // App登录用户名(手机号码/邮箱)存储key
-NSString * const JTAppLoginUserName  = @"xoKeyChain_AppLoginUserName";
+NSString * const XOAppLoginUserName  = @"xoKeyChain_AppLoginUserName";
 
 // App登录密码存储key
-NSString * const JTAppLoginPassWord  = @"xoKeyChain_AppLoginPassWord";
+NSString * const XOAppLoginPassWord  = @"xoKeyChain_AppLoginPassWord";
 
 
-static NSString * JTKeyChainKey = nil;
-static NSString * JTKeyChainIv = nil;
+static NSString * XOKeyChainKey = nil;
+static NSString * XOKeyChainIv = nil;
 
 @implementation XOKeyChainTool
 
@@ -104,30 +104,30 @@ static NSString * JTKeyChainIv = nil;
 
 + (NSString *)getKeychainSignKey
 {
-    if (XOIsEmptyString(JTKeyChainKey)) {
+    if (XOIsEmptyString(XOKeyChainKey)) {
         NSString *keychainSign = [XOBaseConfig defaultConfig].config.keyChainSign;
         if (keychainSign.length == 1) {
-            JTKeyChainKey = keychainSign;
+            XOKeyChainKey = keychainSign;
         } else {
             NSUInteger halfIndex = (keychainSign.length%2 == 0) ? keychainSign.length/2 : (keychainSign.length/2 + 1);
-            JTKeyChainKey = [keychainSign substringToIndex:halfIndex];
+            XOKeyChainKey = [keychainSign substringToIndex:halfIndex];
         }
     }
-    return JTKeyChainKey;
+    return XOKeyChainKey;
 }
 
 + (NSString *)getKeychainSignIv
 {
-    if (XOIsEmptyString(JTKeyChainIv)) {
+    if (XOIsEmptyString(XOKeyChainIv)) {
         NSString *keychainSign = [XOBaseConfig defaultConfig].config.keyChainSign;
         if (keychainSign.length == 1) {
-            JTKeyChainIv = keychainSign;
+            XOKeyChainIv = keychainSign;
         } else {
             NSUInteger halfIndex = (keychainSign.length%2 == 0) ? keychainSign.length/2 : (keychainSign.length/2 + 1);
-            JTKeyChainIv = [keychainSign substringFromIndex:halfIndex];
+            XOKeyChainIv = [keychainSign substringFromIndex:halfIndex];
         }
     }
-    return JTKeyChainIv;
+    return XOKeyChainIv;
 }
 
 #pragma mark ====================== 对数据加解密处理 ======================
@@ -167,7 +167,7 @@ static NSString * JTKeyChainIv = nil;
 {
     if (!XOIsEmptyString(token)) {
         NSString *encrypt = [XOKeyChainTool encryptString:token];
-        [XOKeyChainTool addKeychainData:encrypt forKey:JTAppAuthorTokenKey];
+        [XOKeyChainTool addKeychainData:encrypt forKey:XOAppAuthorTokenKey];
     } else {
         NSLog(@"token为空 ,保存失败");
     }
@@ -175,13 +175,13 @@ static NSString * JTKeyChainIv = nil;
 // 取token
 + (NSString * _Nullable)getToken
 {
-    NSString *encrypt = (NSString *)[XOKeyChainTool getKeychainDataForKey:JTAppAuthorTokenKey];
+    NSString *encrypt = (NSString *)[XOKeyChainTool getKeychainDataForKey:XOAppAuthorTokenKey];
     return [XOKeyChainTool decryptString:encrypt];
 }
 // 删除token
 + (void)clearToken
 {
-    [XOKeyChainTool deleteKeychainDataForKey:JTAppAuthorTokenKey];
+    [XOKeyChainTool deleteKeychainDataForKey:XOAppAuthorTokenKey];
 }
 
 #pragma mark == username & password
@@ -191,14 +191,14 @@ static NSString * JTKeyChainIv = nil;
 {
     if (!XOIsEmptyString(userName)) {
         NSString *usernameEncrypt = [XOKeyChainTool encryptString:userName];
-        [XOKeyChainTool addKeychainData:usernameEncrypt forKey:JTAppLoginUserName];
+        [XOKeyChainTool addKeychainData:usernameEncrypt forKey:XOAppLoginUserName];
     } else {
         NSLog(@"userName为空 ,保存失败");
     }
     
     if (!XOIsEmptyString(password)) {
         NSString *passwordEncrypt = [XOKeyChainTool encryptString:password];
-        [XOKeyChainTool addKeychainData:passwordEncrypt forKey:JTAppLoginPassWord];
+        [XOKeyChainTool addKeychainData:passwordEncrypt forKey:XOAppLoginPassWord];
     } else {
         NSLog(@"password为空 ,保存失败");
     }
@@ -206,21 +206,21 @@ static NSString * JTKeyChainIv = nil;
 // 取登录用户名
 + (NSString * _Nullable)getUserName
 {
-    NSString *usernameEncrypt = (NSString *)[XOKeyChainTool getKeychainDataForKey:JTAppLoginUserName];
+    NSString *usernameEncrypt = (NSString *)[XOKeyChainTool getKeychainDataForKey:XOAppLoginUserName];
     return [XOKeyChainTool decryptString:usernameEncrypt];
 }
 // 取登录密码
 + (NSString * _Nullable)getPassword
 {
-    NSString *passwordEncrypt = (NSString *)[XOKeyChainTool getKeychainDataForKey:JTAppLoginPassWord];
+    NSString *passwordEncrypt = (NSString *)[XOKeyChainTool getKeychainDataForKey:XOAppLoginPassWord];
     return [XOKeyChainTool decryptString:passwordEncrypt];
 }
 
 // 删除登录用户名和密码
 + (void)clearAppLoginInfo
 {
-    [XOKeyChainTool deleteKeychainDataForKey:JTAppLoginUserName];
-    [XOKeyChainTool deleteKeychainDataForKey:JTAppLoginPassWord];
+    [XOKeyChainTool deleteKeychainDataForKey:XOAppLoginUserName];
+    [XOKeyChainTool deleteKeychainDataForKey:XOAppLoginPassWord];
 }
 
 // 退出登录, 清除所有相关数据

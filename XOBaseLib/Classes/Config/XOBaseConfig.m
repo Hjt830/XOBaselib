@@ -9,10 +9,10 @@
 #import "XOMacro.h"
 
 // 本地存储用到的默认秘钥 (XOUserDefault中使用,  为32位小写连续字符串)
-#define JTLocalStorageSign @"YxPDinpCGfKpZAdviKP5o5bVSYdSdu39"
+#define XOLocalStorageSign @"YxPDinpCGfKpZAdviKP5o5bVSYdSdu39"
 
 // 本地存储用到的默认秘钥 (XOKeyChainTool中使用, 为32位小写连续字符串)
-#define JTKeyChainSignKey @"fvHMywUAdXlXoKjIVGBRoUX3zeBImbPo"
+#define XOKeyChainSignKey @"fvHMywUAdXlXoKjIVGBRoUX3zeBImbPo"
 
 
 
@@ -40,8 +40,8 @@ static XOBaseConfig *__baseConfig = nil;
     }
     else {
         XOBaseConfigModel * configModel = [[XOBaseConfigModel alloc] init];
-        configModel.localStorageSign = JTLocalStorageSign;
-        configModel.keyChainSign = JTKeyChainSignKey;
+        configModel.localStorageSign = XOLocalStorageSign;
+        configModel.keyChainSign = XOKeyChainSignKey;
         _config = configModel;
     }
 }

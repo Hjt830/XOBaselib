@@ -16,33 +16,33 @@
 #pragma mark ========================= language =========================
 
 // 语言设置key
-NSString * const JTLanguageOptionKey        = @"JTLanguageOptionKey";
+NSString * const XOLanguageOptionKey        = @"XOLanguageOptionKey";
 
 // 中文简体
-JTLanguageName const JTLanguageNameZh_Hans  = @"zh-Hans";
+XOLanguageName const XOLanguageNameZh_Hans  = @"zh-Hans";
 // 中文繁体
-JTLanguageName const JTLanguageNameZh_Hant  = @"zh_Hant";
+XOLanguageName const XOLanguageNameZh_Hant  = @"zh_Hant";
 // 英文
-JTLanguageName const JTLanguageNameEn       = @"en";
+XOLanguageName const XOLanguageNameEn       = @"en";
 
 // 语言改变通知中心
-NSString * const JTLanguageDidChangeNotification    = @"JTLanguageDidChangeNotificaiton";
+NSString * const XOLanguageDidChangeNotification    = @"XOLanguageDidChangeNotificaiton";
 
 
 #pragma mark ========================= fontSize =========================
 
 // 字体大小设置key
-NSString * const JTFontSizeOptionKey                = @"JTFontSizeOptionKey";
+NSString * const XOFontSizeOptionKey                = @"XOFontSizeOptionKey";
 // 字体大小改变通知中心
-NSString * const JTFontSizeDidChangeNotification    = @"JTFontSizeDidChangeNotification";
+NSString * const XOFontSizeDidChangeNotification    = @"XOFontSizeDidChangeNotification";
 
 
 #pragma mark ========================= background =========================
 
 // 聊天背景设置key
-NSString * const JTChatBackgroundOptionKey          = @"JTFontSizeOptionKey";
+NSString * const XOChatBackgroundOptionKey          = @"XOFontSizeOptionKey";
 // 聊天背景改变通知中心
-NSString * const JTBackgroundDidChangeNotification  = @"JTBackgroundDidChangeNotification";
+NSString * const XOBackgroundDidChangeNotification  = @"XOBackgroundDidChangeNotification";
 
 
 
@@ -82,7 +82,7 @@ static XOSettingManager * __settingManager = nil;
 - (void)loadSetting
 {
     // 读取用户偏好设置
-    if ([JTFM fileExistsAtPath:JTFileUserSettingPath()]) {
+    if ([XOFM fileExistsAtPath:XOFileUserSettingPath()]) {
         [self loadUserSetting];
     }
     // 如果用户偏好设置文件为空, 则加载系统默认设置
@@ -94,41 +94,41 @@ static XOSettingManager * __settingManager = nil;
 // 加载用户偏好设置
 - (void)loadUserSetting
 {
-    _settingDictionary = [NSDictionary dictionaryWithContentsOfFile:JTFileUserSettingPath()];
+    _settingDictionary = [NSDictionary dictionaryWithContentsOfFile:XOFileUserSettingPath()];
     _isUserSetting = YES;
     // 语言
-    _language = _settingDictionary[JTLanguageOptionKey];    // 用户语言设置
+    _language = _settingDictionary[XOLanguageOptionKey];    // 用户语言设置
     _languageBundle = [NSBundle bundleWithPath:[[NSBundle xo_baseLibBundle] pathForResource:_language ofType:@"lproj"]];
     // 字体
-    NSNumber *fontNumber = _settingDictionary[JTFontSizeOptionKey];
+    NSNumber *fontNumber = _settingDictionary[XOFontSizeOptionKey];
     _fontSize = [fontNumber unsignedIntegerValue];          // 用户字体设置
 }
 
 // 加载系统默认设置
 - (void)loadDefaultSetting
 {
-    _settingDictionary = [NSDictionary dictionaryWithContentsOfFile:JTFileDefaultSettingPath()];
+    _settingDictionary = [NSDictionary dictionaryWithContentsOfFile:XOFileDefaultSettingPath()];
     _isUserSetting = NO;
     // 语言
     _language = [[NSLocale preferredLanguages] firstObject];    // 默认跟随系统语言设置
     _languageBundle = [NSBundle bundleWithPath:[[NSBundle xo_baseLibBundle] pathForResource:_language ofType:@"lproj"]];
     // 字体
-    _fontSize = JTFontSizeStandard;                             // 默认标准字体大小
+    _fontSize = XOFontSizeStandard;                             // 默认标准字体大小
 }
 
 #pragma mark ========================= setter =========================
 
 // 设置语言
-- (void)setAppLanguage:(JTLanguageName)language
+- (void)setAppLanguage:(XOLanguageName)language
 {
     if (!XOIsEmptyString(language)) {
         // 改变语言
         _language = language;
         _languageBundle = [NSBundle bundleWithPath:[[NSBundle xo_baseLibBundle] pathForResource:language ofType:@"lproj"]];
         // 发送通知
-        [[NSNotificationCenter defaultCenter] postNotificationName:JTLanguageDidChangeNotification object:@{JTLanguageOptionKey: language}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:XOLanguageDidChangeNotification object:@{XOLanguageOptionKey: language}];
         // 更新用户设置文件
-        [self updateUserSettingWithOptionKey:JTLanguageOptionKey optionValue:language];
+        [self updateUserSettingWithOptionKey:XOLanguageOptionKey optionValue:language];
 
         // 设置第三方库的语言
         [[MJRefreshConfig defaultConfig] setLanguageCode:language];
@@ -136,15 +136,15 @@ static XOSettingManager * __settingManager = nil;
 }
 
 // 设置字体大小
-- (void)setAppFontSize:(JTFontSize)fontSize
+- (void)setAppFontSize:(XOFontSize)fontSize
 {
     // 改变字体大小
     _fontSize = fontSize;
     NSNumber *fontNumber = [NSNumber numberWithUnsignedInteger:fontSize];
     // 发送通知
-    [[NSNotificationCenter defaultCenter] postNotificationName:JTFontSizeDidChangeNotification object:@{JTFontSizeOptionKey: fontNumber}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:XOFontSizeDidChangeNotification object:@{XOFontSizeOptionKey: fontNumber}];
     // 更新用户设置文件
-    [self updateUserSettingWithOptionKey:JTFontSizeOptionKey optionValue:fontNumber];
+    [self updateUserSettingWithOptionKey:XOFontSizeOptionKey optionValue:fontNumber];
 }
 
 #pragma mark ========================= public =========================
@@ -153,7 +153,7 @@ static XOSettingManager * __settingManager = nil;
 - (void)loginIn
 {
     // 读取用户偏好设置
-    if ([JTFM fileExistsAtPath:JTFileUserSettingPath()]) {
+    if ([XOFM fileExistsAtPath:XOFileUserSettingPath()]) {
         [self loadUserSetting];
     }
     // 如果用户偏好设置文件为空, 则将系统设置拷贝一份放到用户设置路径下
@@ -177,20 +177,20 @@ static XOSettingManager * __settingManager = nil;
 - (void)generateUserSettingFile
 {
     // 根据系统默认设置初始化用户设置文件
-    NSMutableDictionary *mutSetting = [NSDictionary dictionaryWithContentsOfFile:JTFileDefaultSettingPath()].mutableCopy;
+    NSMutableDictionary *mutSetting = [NSDictionary dictionaryWithContentsOfFile:XOFileDefaultSettingPath()].mutableCopy;
     // 语言
     NSString *systemLanguage = [[NSLocale preferredLanguages] firstObject];
     _language = XOIsEmptyString(systemLanguage) ? @"en" : systemLanguage;
-    [mutSetting setValue:_language forKey:JTLanguageOptionKey];
+    [mutSetting setValue:_language forKey:XOLanguageOptionKey];
     _languageBundle = [NSBundle bundleWithPath:[[NSBundle xo_baseLibBundle] pathForResource:_language ofType:@"lproj"]];
     // 字体
-    _fontSize = JTFontSizeStandard;
-    NSNumber *fontNumber = [NSNumber numberWithFloat:JTFontSizeStandard];
-    [mutSetting setValue:fontNumber forKey:JTFontSizeOptionKey];
+    _fontSize = XOFontSizeStandard;
+    NSNumber *fontNumber = [NSNumber numberWithFloat:XOFontSizeStandard];
+    [mutSetting setValue:fontNumber forKey:XOFontSizeOptionKey];
     
     // 将更新后的设置写入到用户设置目录下
     [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
-        BOOL result = [mutSetting writeToFile:JTFileUserSettingPath() atomically:YES];
+        BOOL result = [mutSetting writeToFile:XOFileUserSettingPath() atomically:YES];
         if (result) {
             self->_settingDictionary = mutSetting;
             self->_isUserSetting = YES;
@@ -205,11 +205,11 @@ static XOSettingManager * __settingManager = nil;
 // 删除一个用户设置文件
 - (void)removeUserSettingFile
 {
-    if ([JTFM fileExistsAtPath:JTFileUserSettingPath()]) {
+    if ([XOFM fileExistsAtPath:XOFileUserSettingPath()]) {
         
         [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
             NSError *removeError = nil;
-            if ([JTFM removeItemAtPath:JTFileUserSettingPath() error:&removeError]) {
+            if ([XOFM removeItemAtPath:XOFileUserSettingPath() error:&removeError]) {
                 NSLog(@"==================================================================");
                 NSLog(@"======================== 删除用户设置文件成功 ========================");
                 NSLog(@"==================================================================");
@@ -230,14 +230,14 @@ static XOSettingManager * __settingManager = nil;
 // 更新用户设置文件
 - (void)updateUserSettingWithOptionKey:(NSString * _Nonnull)optionKey optionValue:(id)value
 {
-    NSMutableDictionary *mutSetting = [NSDictionary dictionaryWithContentsOfFile:JTFileUserSettingPath()].mutableCopy;
+    NSMutableDictionary *mutSetting = [NSDictionary dictionaryWithContentsOfFile:XOFileUserSettingPath()].mutableCopy;
     [mutSetting setValue:value forKey:optionKey];
     // 将更新后的设置写入到用户设置目录下
     [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
         // 删除旧的用户设置文件
         NSError *error = nil;
-        if ([JTFM removeItemAtPath:JTFileUserSettingPath() error:&error]) {
-            if ([mutSetting writeToFile:JTFileUserSettingPath() atomically:YES]) {
+        if ([XOFM removeItemAtPath:XOFileUserSettingPath() error:&error]) {
+            if ([mutSetting writeToFile:XOFileUserSettingPath() atomically:YES]) {
                 NSLog(@"更新用户设置成功: %@ : %@", optionKey, value);
             } else {
                 NSLog(@"更新用户设置失败: %@ --- %@", optionKey, error);

@@ -15,7 +15,7 @@ static NSString * const KSaveKey = @"param";       // 参数
 static NSString * const KTimeKey = @"timeStamp";   // 时间戳
 
 
-#define JTUF    [NSUserDefaults standardUserDefaults]
+#define XOUF    [NSUserDefaults standardUserDefaults]
 
 
 @interface XOUserDefault ()
@@ -79,7 +79,7 @@ static XOUserDefault * __userDefault = nil;
     NSError *error = nil;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
     if (error) {
-        JTLog(@"取值失败: %@", error);
+        XOLog(@"取值失败: %@", error);
         return nil;
     }
     NSString *decrypt = [dict valueForKey:KSaveKey];
@@ -97,20 +97,20 @@ static XOUserDefault * __userDefault = nil;
 - (void)saveCustomData:(id _Nonnull)data withKey:(NSString * _Nonnull)key
 {
     if (!data || [data isEqual:[NSNull null]]) {
-        JTLog(@"data不能为空 key:%@", key);
+        XOLog(@"data不能为空 key:%@", key);
         return;
     }
     if (![data conformsToProtocol:@protocol(NSCoding)]) {
-        JTLog(@"data未实现NSCoding协议，不能保存  key:%@", key);
+        XOLog(@"data未实现NSCoding协议，不能保存  key:%@", key);
         return;
     }
     if (XOIsEmptyString(key)) {
-        JTLog(@"key不能为空");
+        XOLog(@"key不能为空");
         return;
     }
     
-    [JTUF setObject:data forKey:[key lowerMD5String_32]];
-    [JTUF synchronize];
+    [XOUF setObject:data forKey:[key lowerMD5String_32]];
+    [XOUF synchronize];
 }
 
 /** @brief 获取自定义保存的数据
@@ -119,11 +119,11 @@ static XOUserDefault * __userDefault = nil;
 - (id)getCustomData:(NSString * _Nonnull)key
 {
     if (XOIsEmptyString(key)) {
-        JTLog(@"key不能为空");
+        XOLog(@"key不能为空");
         return nil;
     }
     
-    id data = [JTUF objectForKey:[key lowerMD5String_32]];
+    id data = [XOUF objectForKey:[key lowerMD5String_32]];
     return data;
 }
 
@@ -131,12 +131,12 @@ static XOUserDefault * __userDefault = nil;
 - (void)clearCustomData:(NSString * _Nonnull)key
 {
     if (XOIsEmptyString(key)) {
-        JTLog(@"key不能为空");
+        XOLog(@"key不能为空");
         return;
     }
     
-    [JTUF removeObjectForKey:[key lowerMD5String_32]];
-    [JTUF synchronize];
+    [XOUF removeObjectForKey:[key lowerMD5String_32]];
+    [XOUF synchronize];
 }
 
 @end

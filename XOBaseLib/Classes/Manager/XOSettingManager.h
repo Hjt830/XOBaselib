@@ -14,64 +14,64 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark ========================= language =========================
 
 // 语言设置key
-extern NSString * const JTLanguageOptionKey;
+extern NSString * const XOLanguageOptionKey;
 
 // 定义语言类型
-typedef NSString *JTLanguageName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString *XOLanguageName NS_EXTENSIBLE_STRING_ENUM;
 // 中文简体
-extern JTLanguageName const JTLanguageNameZh_Hans;
+extern XOLanguageName const XOLanguageNameZh_Hans;
 // 中文繁体
-extern JTLanguageName const JTLanguageNameZh_Hant;
+extern XOLanguageName const XOLanguageNameZh_Hant;
 // 英文
-extern JTLanguageName const JTLanguageNameEn;
+extern XOLanguageName const XOLanguageNameEn;
 
 // 语言改变通知中心
-extern NSString * const JTLanguageDidChangeNotification;
+extern NSString * const XOLanguageDidChangeNotification;
 
 
 
 #pragma mark ========================= fontSize =========================
 
 // 字体大小设置key
-extern NSString * const JTFontSizeOptionKey;
+extern NSString * const XOFontSizeOptionKey;
 
 // 字体大小枚举
-typedef NS_ENUM(NSUInteger, JTFontSize) {
+typedef NS_ENUM(NSUInteger, XOFontSize) {
     // 超大
-    JTFontSizeHuge      = 21,
+    XOFontSizeHuge      = 21,
     // 很大
-    JTFontSizeLarge     = 19,
+    XOFontSizeLarge     = 19,
     // 大
-    JTFontSizeBig       = 17,
+    XOFontSizeBig       = 17,
     // 标准
-    JTFontSizeStandard  = 15,
+    XOFontSizeStandard  = 15,
     // 较小
-    JTFontSizeSmall     = 13,
+    XOFontSizeSmall     = 13,
 };
 
 // 字体大小改变通知中心
-extern NSString * const JTFontSizeDidChangeNotification;
+extern NSString * const XOFontSizeDidChangeNotification;
 
-#define JTTextFont [UIFont systemFontOfSize:[XOSettingManager defaultManager].fontSize]
+#define XOTextFont [UIFont systemFontOfSize:[XOSettingManager defaultManager].fontSize]
 
-#define JTSubTextFont [UIFont systemFontOfSize:([XOSettingManager defaultManager].fontSize - 3)]
+#define XOSubTextFont [UIFont systemFontOfSize:([XOSettingManager defaultManager].fontSize - 3)]
 
 #pragma mark ========================= background =========================
 
 // 聊天背景设置key
-extern NSString * const JTChatBackgroundOptionKey;
+extern NSString * const XOChatBackgroundOptionKey;
 
 // 聊天背景改变通知中心
-extern NSString * const JTBackgroundDidChangeNotification;
+extern NSString * const XOBackgroundDidChangeNotification;
 
 
 
 
 /// 通用设置改变的类型
-typedef NS_ENUM(NSInteger, JTGenralChangeType) {
-    JTGenralChangeLanguage      = 1,
-    JTGenralChangeFontSize      = 2,
-    JTGenralChangeChatBgImage   = 3,
+typedef NS_ENUM(NSInteger, XOGenralChangeType) {
+    XOGenralChangeLanguage      = 1,
+    XOGenralChangeFontSize      = 2,
+    XOGenralChangeChatBgImage   = 3,
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -84,10 +84,10 @@ typedef NS_ENUM(NSInteger, JTGenralChangeType) {
 @property (nonatomic, assign, readonly) BOOL               isUserSetting;
 
 
-@property (nonatomic, copy, readonly) JTLanguageName       language;    // app默认设置为跟随系统设置
+@property (nonatomic, copy, readonly) XOLanguageName       language;    // app默认设置为跟随系统设置
 @property (nonatomic, strong, readonly) NSBundle           *languageBundle;
 
-@property (nonatomic, assign, readonly) JTFontSize         fontSize;     // app默认设置为JTFontSizeStandard
+@property (nonatomic, assign, readonly) XOFontSize         fontSize;     // app默认设置为XOFontSizeStandard
 
 
 + (instancetype)defaultManager;
@@ -99,10 +99,10 @@ typedef NS_ENUM(NSInteger, JTGenralChangeType) {
 - (void)loginOut;
 
 // 设置语言
-- (void)setAppLanguage:(JTLanguageName)language;
+- (void)setAppLanguage:(XOLanguageName)language;
 
 // 设置字体大小
-- (void)setAppFontSize:(JTFontSize)fontSize;
+- (void)setAppFontSize:(XOFontSize)fontSize;
 
 
 @end

@@ -45,7 +45,7 @@ static XOSmsCodeManager *__codeManager = nil;
 /** @brief 保存验证码
  *  @param smsCode 要保存的验证码数据
  */
-- (void)saveSmsCode:(JTSMSCodeModel * _Nonnull)smsCode
+- (void)saveSmsCode:(XOSMSCodeModel * _Nonnull)smsCode
 {
     if (!smsCode) return;
     
@@ -86,7 +86,7 @@ static XOSmsCodeManager *__codeManager = nil;
 /** @brief 根据类型获取验证码数据
  *  @param smsCodeType 要获取的验证码数据的类型
  */
-- (JTSMSCodeModel * _Nullable)getSmsCode:(HTSMSCodeType)smsCodeType
+- (XOSMSCodeModel * _Nullable)getSmsCode:(HTSMSCodeType)smsCodeType
 {
     NSDictionary *codeDict = [[NSUserDefaults standardUserDefaults] objectForKey:HTSmsCodeKey];
     if (XOIsEmptyDictionary(codeDict)) {
@@ -107,7 +107,7 @@ static XOSmsCodeManager *__codeManager = nil;
             break;
     }
     
-    JTSMSCodeModel *smsCode = [[JTSMSCodeModel alloc] init];
+    XOSMSCodeModel *smsCode = [[XOSMSCodeModel alloc] init];
     smsCode.codeType = smsCodeType;
     smsCode.telphone = [dict valueForKey:@"telphone"];
     smsCode.sendTime = [[dict valueForKey:@"sendTime"] doubleValue];
@@ -118,6 +118,6 @@ static XOSmsCodeManager *__codeManager = nil;
 @end
 
 
-@implementation JTSMSCodeModel
+@implementation XOSMSCodeModel
 
 @end

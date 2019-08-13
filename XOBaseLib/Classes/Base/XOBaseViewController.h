@@ -13,13 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /// 请求权限的类型
-typedef NS_ENUM(NSInteger, JTRequestAuthType) {
-    JTRequestAuthPhotos  = 200,     // 相册
-    JTRequestAuthCamera   = 201,    // 相机
-    JTRequestAuthLocation = 202,    // 定位
-    JTRequestAuthMicphone = 203,    // 麦克风
-    JTRequestAuthAddressBook = 204, // 通讯录
-    JTRequestAuthNotification = 205,// 通知
+typedef NS_ENUM(NSInteger, XORequestAuthType) {
+    XORequestAuthPhotos  = 200,     // 相册
+    XORequestAuthCamera   = 201,    // 相机
+    XORequestAuthLocation = 202,    // 定位
+    XORequestAuthMicphone = 203,    // 麦克风
+    XORequestAuthAddressBook = 204, // 通讯录
+    XORequestAuthNotification = 205,// 通知
 };
 
 
@@ -59,7 +59,7 @@ typedef NS_ENUM(NSInteger, JTRequestAuthType) {
  *  @param genralType 改变的类型
  *  @param userInfo 改变后的通用数据
  */
-- (void)refreshByGenralSettingChange:(JTGenralChangeType)genralType userInfo:(NSDictionary *_Nonnull)userInfo;
+- (void)refreshByGenralSettingChange:(XOGenralChangeType)genralType userInfo:(NSDictionary *_Nonnull)userInfo;
 
 
 /**
@@ -92,7 +92,7 @@ typedef NS_ENUM(NSInteger, JTRequestAuthType) {
 /**
  *  提示打开权限
  */
-- (void)showAlertAuthor:(JTRequestAuthType)authType;
+- (void)showAlertAuthor:(XORequestAuthType)authType;
     
 @end
 

@@ -25,8 +25,8 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChanged:) name:JTLanguageDidChangeNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontSizeChanged:) name:JTFontSizeDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChanged:) name:XOLanguageDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontSizeChanged:) name:XOFontSizeDidChangeNotification object:nil];
     }
     return self;
 }
@@ -40,8 +40,8 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChanged:) name:JTLanguageDidChangeNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontSizeChanged:) name:JTFontSizeDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChanged:) name:XOLanguageDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontSizeChanged:) name:XOFontSizeDidChangeNotification object:nil];
     }
     return self;
 }
@@ -132,7 +132,7 @@
 - (void)setBadgeNum:(NSUInteger)badgeNum atIndex:(NSUInteger)index
 {
 //    dispatch_async(dispatch_get_main_queue(), ^{
-//        JTTabbarController *mainVC = (JTTabbarController *)self.tabBarController;
+//        XOTabbarController *mainVC = (XOTabbarController *)self.tabBarController;
 //        if (mainVC) {
 //            UITabBarItem *tabbarItem;
 //            switch (index) {
@@ -185,7 +185,7 @@
 - (void)setLeftBarButtonTitle:(NSString  * _Nonnull)title
 {
     if (XOIsEmptyString(title)) {
-        JTLog(@"title不能为空");
+        XOLog(@"title不能为空");
         return;
     }
     
@@ -200,7 +200,7 @@
 - (void)setLeftBarButtonImage:(UIImage  * _Nonnull)image
 {
     if (!image) {
-        JTLog(@"image不能为空");
+        XOLog(@"image不能为空");
         return;
     }
     
@@ -218,7 +218,7 @@
 - (void)setRightBarButtonTitle:(NSString * _Nonnull)title
 {
     if (XOIsEmptyString(title)) {
-        JTLog(@"title不能为空");
+        XOLog(@"title不能为空");
         return;
     }
     
@@ -233,7 +233,7 @@
 - (void)setRightBarButtonImage:(UIImage * _Nonnull)image
 {
     if (!image) {
-        JTLog(@"image不能为空");
+        XOLog(@"image不能为空");
         return;
     }
     
@@ -248,35 +248,35 @@
 /**
  *  导航栏按钮被点击
  */
-- (void)leftBBIDidClick:(UIBarButtonItem *)sender { /*JTLog(@"导航栏左边按钮被点击");*/ }
-- (void)rightBBIDidClick:(UIBarButtonItem *)sender { /*JTLog(@"导航栏右边按钮被点击");*/ }
+- (void)leftBBIDidClick:(UIBarButtonItem *)sender { /*XOLog(@"导航栏左边按钮被点击");*/ }
+- (void)rightBBIDidClick:(UIBarButtonItem *)sender { /*XOLog(@"导航栏右边按钮被点击");*/ }
 
 
 
 /**
  *  键盘将要升起
  */
-- (void)keyboardWillShow:(NSNotification *)noti { /*JTLog(@"键盘将要升起");*/ }
-- (void)keyboardDidShow:(NSNotification *)noti { /*JTLog(@"键盘已经升起");*/ }
-- (void)keyboardWillHide:(NSNotification *)noti { /*JTLog(@"键盘将要降落");*/ }
+- (void)keyboardWillShow:(NSNotification *)noti { /*XOLog(@"键盘将要升起");*/ }
+- (void)keyboardDidShow:(NSNotification *)noti { /*XOLog(@"键盘已经升起");*/ }
+- (void)keyboardWillHide:(NSNotification *)noti { /*XOLog(@"键盘将要降落");*/ }
 
 /**
  *  通用设置修改通知
  */
 - (void)languageChanged:(NSNotification *)noti
 {
-    [self refreshByGenralSettingChange:JTGenralChangeLanguage userInfo:noti.object];
+    [self refreshByGenralSettingChange:XOGenralChangeLanguage userInfo:noti.object];
 }
 - (void)fontSizeChanged:(NSNotification *)noti
 {
-    [self refreshByGenralSettingChange:JTGenralChangeFontSize userInfo:noti.object];
+    [self refreshByGenralSettingChange:XOGenralChangeFontSize userInfo:noti.object];
 }
 
 /**
  *  通用设置改变
  *  由子类去具体实现
  */
-- (void)refreshByGenralSettingChange:(JTGenralChangeType)genralType userInfo:(NSDictionary *)userInfo {}
+- (void)refreshByGenralSettingChange:(XOGenralChangeType)genralType userInfo:(NSDictionary *)userInfo {}
 
 /**
  *  弹框提醒
@@ -289,7 +289,7 @@
      cancelComplection:(void(^)(void))cancelComplection
 {
     if (XOIsEmptyString(sureTitle) && XOIsEmptyString(cancelTitle)) {
-        JTLog(@"sureTitle 和 cancelTitle 不能都为空");
+        XOLog(@"sureTitle 和 cancelTitle 不能都为空");
         return;
     }
     
@@ -333,7 +333,7 @@
      cancelComplection:(void(^)(void))cancelComplection
 {
     if (XOIsEmptyArray(actions)) {
-        JTLog(@"actions不能都为空");
+        XOLog(@"actions不能都为空");
         return;
     }
     
@@ -399,38 +399,38 @@
 /**
  *  显示申请权限
  */
-- (void)showAlertAuthor:(JTRequestAuthType)authType
+- (void)showAlertAuthor:(XORequestAuthType)authType
 {
     NSString *tips = XOLocalizedString(@"tip.title");
     NSString *sure = XOLocalizedString(@"sure");
     NSString *appname = [[NSBundle mainBundle] infoDictionary][@"CFBundleDisplayName"];
     // 相机
-    if (JTRequestAuthCamera == authType) {
+    if (XORequestAuthCamera == authType) {
         NSString *message = [NSString stringWithFormat:@"%@%@", XOLocalizedString(@"permission.setting.Camera.%@"), appname];
         [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:nil sureComplection:nil cancelComplection:nil];
     }
     // 相册
-    else if (JTRequestAuthPhotos == authType) {
+    else if (XORequestAuthPhotos == authType) {
         NSString *message = [NSString stringWithFormat:@"%@%@", XOLocalizedString(@"permission.setting.Photos.%@"), appname];
         [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:nil sureComplection:nil cancelComplection:nil];
     }
     // 定位
-    else if (JTRequestAuthLocation == authType) {
+    else if (XORequestAuthLocation == authType) {
         NSString *message = [NSString stringWithFormat:@"%@%@", XOLocalizedString(@"permission.setting.Location.%@"), appname];
         [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:nil sureComplection:nil cancelComplection:nil];
     }
     // 麦克风
-    else if (JTRequestAuthMicphone == authType) {
+    else if (XORequestAuthMicphone == authType) {
         NSString *message = [NSString stringWithFormat:@"%@%@", XOLocalizedString(@"permission.setting.Micphone.%@"), appname];
         [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:nil sureComplection:nil cancelComplection:nil];
     }
     // 通讯录
-    else if (JTRequestAuthAddressBook == authType) {
+    else if (XORequestAuthAddressBook == authType) {
         NSString *message = [NSString stringWithFormat:@"%@%@", XOLocalizedString(@"permission.setting.AddressBook.%@"), appname];
         [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:nil sureComplection:nil cancelComplection:nil];
     }
     // 通知
-    else if (JTRequestAuthNotification == authType) {
+    else if (XORequestAuthNotification == authType) {
         NSString *message = [NSString stringWithFormat:@"%@%@", XOLocalizedString(@"permission.setting.Notification.%@"), appname];
         [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:nil sureComplection:nil cancelComplection:nil];
     }

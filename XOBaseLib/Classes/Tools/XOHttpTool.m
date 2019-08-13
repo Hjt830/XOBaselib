@@ -103,7 +103,7 @@ static XOHttpTool *__httpTool = nil;
             }
             else {
                 int code = [[response valueForKey:@"code"] intValue];
-                if (JTHttpSuccessCode != code) {
+                if (XOHttpSuccessCode != code) {
                     if (failBlock) {
                         NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain code:0 userInfo:@{@"session": @"session已经过期"}];
                         failBlock (error);

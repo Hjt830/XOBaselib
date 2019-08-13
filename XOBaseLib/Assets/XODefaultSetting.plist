@@ -2,35 +2,35 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>JTLanguageOptionKey</key>
+	<key>XOLanguageOptionKey</key>
 	<string>default</string>
-	<key>JTFontSizeOptionKey</key>
+	<key>XOFontSizeOptionKey</key>
 	<string>default</string>
-	<key>JTChatBackgroundOptionKey</key>
+	<key>XOChatBackgroundOptionKey</key>
 	<string>default</string>
-	<key>JTChatEmojiOptionKey</key>
+	<key>XOChatEmojiOptionKey</key>
 	<string>default</string>
-	<key>JTChatDownLoadOptionKey</key>
+	<key>XOChatDownLoadOptionKey</key>
 	<dict>
-		<key>JTChatAutoDownLoadKey</key>
+		<key>XOChatAutoDownLoadKey</key>
 		<true/>
-		<key>JTChatImageDownLoadKey</key>
+		<key>XOChatImageDownLoadKey</key>
 		<true/>
-		<key>JTChatVideoDownLoadKey</key>
+		<key>XOChatVideoDownLoadKey</key>
 		<true/>
 	</dict>
-	<key>JTNotificationOptionKey</key>
+	<key>XONotificationOptionKey</key>
 	<array>
 		<dict>
-			<key>JTNewMessageNotificationKey</key>
+			<key>XONewMessageNotificationKey</key>
 			<true/>
-			<key>JTCallRemindNotificationKey</key>
+			<key>XOCallRemindNotificationKey</key>
 			<true/>
-			<key>JTShowDetailNotificationKey</key>
+			<key>XOShowDetailNotificationKey</key>
 			<true/>
-			<key>JTNotificationSoundKey</key>
+			<key>XONotificationSoundKey</key>
 			<true/>
-			<key>JTNotificationVibrateKey</key>
+			<key>XONotificationVibrateKey</key>
 			<true/>
 		</dict>
 	</array>

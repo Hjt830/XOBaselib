@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // 请求成功Code
-static int const JTHttpSuccessCode = 9999;
+static int const XOHttpSuccessCode = 9999;
 
 
 @interface XOHttpTool : NSObject

@@ -161,34 +161,34 @@
         ...
      }];
  */
-#ifndef JTWeakify
+#ifndef XOWeakify
     #if DEBUG
         #if __has_feature(objc_arc)
-            #define JTWeakify(object) autoreleasepool{} __weak __typeof__(object) weak##_##object = object;
+            #define XOWeakify(object) autoreleasepool{} __weak __typeof__(object) weak##_##object = object;
         #else
-            #define JTWeakify(object) autoreleasepool{} __block __typeof__(object) block##_##object = object;
+            #define XOWeakify(object) autoreleasepool{} __block __typeof__(object) block##_##object = object;
         #endif
     #else
         #if __has_feature(objc_arc)
-            #define JTWeakify(object) try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;
+            #define XOWeakify(object) try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;
         #else
-            #define JTWeakify(object) try{} @finally{} {} __block __typeof__(object) block##_##object = object;
+            #define XOWeakify(object) try{} @finally{} {} __block __typeof__(object) block##_##object = object;
         #endif
     #endif
 #endif
 
-#ifndef JTStrongify
+#ifndef XOStrongify
     #if DEBUG
         #if __has_feature(objc_arc)
-            #define JTStrongify(object) autoreleasepool{} __typeof__(object) object = weak##_##object;
+            #define XOStrongify(object) autoreleasepool{} __typeof__(object) object = weak##_##object;
         #else
-            #define JTStrongify(object) autoreleasepool{} __typeof__(object) object = block##_##object;
+            #define XOStrongify(object) autoreleasepool{} __typeof__(object) object = block##_##object;
         #endif
     #else
         #if __has_feature(objc_arc)
-            #define JTStrongify(object) try{} @finally{} __typeof__(object) object = weak##_##object;
+            #define XOStrongify(object) try{} @finally{} __typeof__(object) object = weak##_##object;
         #else
-            #define JTStrongify(object) try{} @finally{} __typeof__(object) object = block##_##object;
+            #define XOStrongify(object) try{} @finally{} __typeof__(object) object = block##_##object;
         #endif
     #endif
 #endif
@@ -198,9 +198,9 @@
 #pragma mark ====================== 打印日志(打印类名、方法名、代码行数) ======================
 
 #ifdef DEBUG
-    #define JTLog(fmt, ...) NSLog((@"[%@]  %s [Line %d]  " fmt), NSStringFromClass([self class]),  __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+    #define XOLog(fmt, ...) NSLog((@"[%@]  %s [Line %d]  " fmt), NSStringFromClass([self class]),  __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 #else
-    #define JTLog(...) NSLog(__VA_ARGS__)
+    #define XOLog(...) NSLog(__VA_ARGS__)
 #endif
 
 
@@ -209,4 +209,4 @@
 
 
 
-#endif /* JTMarco_h */
+#endif /* XOMarco_h */

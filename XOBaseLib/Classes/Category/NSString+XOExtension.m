@@ -1,5 +1,5 @@
 //
-//  NSString+JTExtension.m
+//  NSString+XOExtension.m
 //  XOBaseLib
 //
 //  Created by kenter on 2019/8/13.
@@ -11,7 +11,7 @@
 #import <CommonCrypto/CommonCrypto.h>
 #import <GTMBase64/GTMBase64.h>
 
-@implementation NSString (Extension)
+@implementation NSString (XOExtension)
     
 #pragma mark ====================== MD5 =======================
     
@@ -111,7 +111,7 @@
     if (cryptStatus == kCCSuccess) {
         NSData *resultData = [NSData dataWithBytesNoCopy:buffer length:numBytesCrypted];
         NSString *encrypted = [GTMBase64 stringByEncodingData:resultData];
-        //        JTLog(@"加密前:%@ \n加密后:%@", self, encrypted);
+        //        XOLog(@"加密前:%@ \n加密后:%@", self, encrypted);
         
         return encrypted;
     }
@@ -157,7 +157,7 @@
     if (cryptorStatus == kCCSuccess) {
         NSData *resultData = [NSData dataWithBytesNoCopy:buffer length:numBytesCrypted];
         NSString *decrypted = [[NSString alloc] initWithData:resultData encoding:NSUTF8StringEncoding];
-        //        JTLog(@"解密前:%@ \n解密后:%@", self, decrypted);
+        //        XOLog(@"解密前:%@ \n解密后:%@", self, decrypted);
         
         return decrypted;
     }
@@ -273,11 +273,11 @@
     NSMutableString * pinYin = [[NSMutableString alloc]initWithString:self];
     //1.先转换为带声调的拼音
     if(CFStringTransform((__bridge CFMutableStringRef)pinYin, NULL, kCFStringTransformMandarinLatin, NO)) {
-        JTLog(@"带声调的pinyin: %@", pinYin);
+        XOLog(@"带声调的pinyin: %@", pinYin);
     }
     //2.再转换为不带声调的拼音
     if (CFStringTransform((__bridge CFMutableStringRef)pinYin, NULL, kCFStringTransformStripDiacritics, NO)) {
-        JTLog(@"不带声调的pinyin: %@", pinYin);
+        XOLog(@"不带声调的pinyin: %@", pinYin);
     }
     //3.去除掉首尾的空白字符和换行字符
     NSString * pinYinStr = [pinYin stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -287,7 +287,7 @@
     pinYinStr = [pinYinStr stringByReplacingOccurrencesOfString:@" " withString:@""];
     //5.首字母大写
     [pinYinStr capitalizedString];
-    JTLog(@"最终的拼音: %@", pinYinStr);
+    XOLog(@"最终的拼音: %@", pinYinStr);
     
     return pinYinStr;
 }

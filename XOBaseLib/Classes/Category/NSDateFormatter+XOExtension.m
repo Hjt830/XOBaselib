@@ -1,5 +1,5 @@
 //
-//  NSDateFormatter+JTExtension.m
+//  NSDateFormatter+XOExtension.m
 //  XOBaseLib
 //
 //  Created by kenter on 2019/8/13.
@@ -8,7 +8,7 @@
 
 #import "NSDateFormatter+XOExtension.h"
 
-@implementation NSDateFormatter (JTExtension)
+@implementation NSDateFormatter (XOExtension)
 
 + (instancetype)dateFormatter
 {

@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSString (Extension)
+@interface NSString (XOExtension)
 
 #pragma mark ====================== MD5 =======================
 
