@@ -22,9 +22,11 @@
 
 + (NSBundle *)xo_baseLibResourceBundle
 {
-    NSBundle *bundle = [NSBundle xo_baseLibBundle];
+    NSBundle *bundle = [NSBundle bundleForClass:[XOBaseConfig class]];
     NSURL *url = [bundle URLForResource:@"XOBaseLib" withExtension:@"bundle"];
     bundle = [NSBundle bundleWithURL:url];
+    NSURL *url1 = [bundle URLForResource:@"XOBaseLib" withExtension:@"bundle"];
+    bundle = [NSBundle bundleWithURL:url1];
     return bundle;
 }
 
