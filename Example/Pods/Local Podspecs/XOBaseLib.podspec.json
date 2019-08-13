@@ -1,0 +1,52 @@
+{
+  "name": "XOBaseLib",
+  "version": "0.0.1",
+  "summary": "XXOOGO项目的基础模块",
+  "description": "XXOOGO项目采用cocoapods做组件化架构，将不同的模块使用pod私有仓库管理，只需要在主项目中使用 pod 'XOBaseLib' 即可导入模块使用",
+  "homepage": "http://192.168.1.119/xxoogo_livechat/xobaselib",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "kenter": "Hjt_830@163.com"
+  },
+  "source": {
+    "git": "http://192.168.1.119/xxoogo_livechat/xochatmodule",
+    "tag": "0.0.1"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "XOBaseLib/Classes/**/*.{h,m}",
+  "public_header_files": "XOBaseLib/Classes/**/*.h",
+  "resource_bundles": {
+    "XOBaseLib": [
+      "XOBaseLib/Assets/*"
+    ]
+  },
+  "frameworks": [
+    "UIKit",
+    "Foundation"
+  ],
+  "dependencies": {
+    "AFNetworking": [
+      "~> 3.2.1"
+    ],
+    "GTMBase64": [
+      "~> 1.0.1"
+    ],
+    "SDWebImage": [
+      "~> 5.0.6"
+    ],
+    "YYKit": [
+      "~> 1.0.9"
+    ],
+    "MJRefresh": [
+      "~> 3.2.0"
+    ],
+    "SVProgressHUD": [
+      "~> 2.2.5"
+    ]
+  }
+}
