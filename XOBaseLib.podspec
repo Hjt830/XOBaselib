@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XOBaseLib'
-  s.version          = '0.1.0'
+  s.version          = '0.0.1'
   s.summary          = 'XXOOGO项目的基础模块'
 
 # This description is used to generate tags and improve search results.
@@ -25,7 +25,7 @@ XXOOGO项目采用cocoapods做组件化架构，将不同的模块使用pod私�
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'kenter' => 'Hjt_830@163.com' }
-  s.source           = { :git => 'http://192.168.1.119/xxoogo_livechat/xochatmodule', :tag => s.version.to_s }
+  s.source           = { :git => 'http://192.168.1.119/xxoogo_livechat/xobaselib.git', :tag => s.version.to_s }
   s.social_media_url = 'https://www.jianshu.com/u/7e5e59276b03'
 
   s.ios.deployment_target = '8.0'
