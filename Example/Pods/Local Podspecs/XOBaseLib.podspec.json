@@ -15,11 +15,12 @@
     "git": "http://192.168.1.119/xxoogo_livechat/xochatmodule",
     "tag": "0.0.1"
   },
+  "social_media_url": "https://www.jianshu.com/u/7e5e59276b03",
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "XOBaseLib/Classes/**/*.{h,m}",
   "public_header_files": "XOBaseLib/Classes/**/*.h",
+  "source_files": "XOBaseLib/Classes/**/*.{h,m}",
   "resource_bundles": {
     "XOBaseLib": [
       "XOBaseLib/Assets/*"
