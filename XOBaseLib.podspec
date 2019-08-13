@@ -26,11 +26,10 @@ XXOOGO项目采用cocoapods做组件化架构，将不同的模块使用pod私�
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'kenter' => 'Hjt_830@163.com' }
   s.source           = { :git => 'http://192.168.1.119/xxoogo_livechat/xochatmodule', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.social_media_url = 'https://www.jianshu.com/u/7e5e59276b03'
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'XOBaseLib/Classes/**/*'
   s.public_header_files = 'XOBaseLib/Classes/**/*.h'
   s.source_files = 'XOBaseLib/Classes/**/*.{h,m}'
   
