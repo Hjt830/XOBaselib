@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>JTLanguageOptionKey</key>
+	<string>default</string>
+	<key>JTFontSizeOptionKey</key>
+	<string>default</string>
+	<key>JTChatBackgroundOptionKey</key>
+	<string>default</string>
+	<key>JTChatEmojiOptionKey</key>
+	<string>default</string>
+	<key>JTChatDownLoadOptionKey</key>
+	<dict>
+		<key>JTChatAutoDownLoadKey</key>
+		<true/>
+		<key>JTChatImageDownLoadKey</key>
+		<true/>
+		<key>JTChatVideoDownLoadKey</key>
+		<true/>
+	</dict>
+	<key>JTNotificationOptionKey</key>
+	<array>
+		<dict>
+			<key>JTNewMessageNotificationKey</key>
+			<true/>
+			<key>JTCallRemindNotificationKey</key>
+			<true/>
+			<key>JTShowDetailNotificationKey</key>
+			<true/>
+			<key>JTNotificationSoundKey</key>
+			<true/>
+			<key>JTNotificationVibrateKey</key>
+			<true/>
+		</dict>
+	</array>
+</dict>
+</plist>

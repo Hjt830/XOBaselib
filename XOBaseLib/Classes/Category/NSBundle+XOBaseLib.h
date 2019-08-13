@@ -1,8 +1,8 @@
 //
 //  NSBundle+XOBaseLib.h
-//  JTMainProject
+//  XOBaseLib
 //
-//  Created by kenter on 2019/7/1.
+//  Created by kenter on 2019/8/13.
 //  Copyright © 2019 KENTER. All rights reserved.
 //
 
@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSBundle (XOBaseLib)
 
-+ (NSBundle *)jt_baseLibBundle;
-+ (NSString *)jt_localizedStringForKey:(NSString *)key value:(NSString *)value;
-+ (NSString *)jt_localizedStringForKey:(NSString *)key;
++ (NSBundle *)xo_baseLibBundle;
++ (NSString *)xo_localizedStringForKey:(NSString *)key value:(NSString *)value;
++ (NSString *)xo_localizedStringForKey:(NSString *)key;
 
 @end
 

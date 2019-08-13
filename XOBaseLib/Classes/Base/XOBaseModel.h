@@ -1,8 +1,8 @@
 //
-//  JTBaseModel.h
-//  JTMainProject
+//  XOBaseModel.h
+//  XOBaseLib
 //
-//  Created by kenter on 2019/7/1.
+//  Created by kenter on 2019/8/13.
 //  Copyright © 2019 KENTER. All rights reserved.
 //
 
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 //////////////////////////////////////////////////////////////////////////////////////
 
 
-@interface JTBaseModel : NSObject <NSCoding, NSCopying>
+@interface XOBaseModel : NSObject <NSCoding, NSCopying>
 
 @end
 

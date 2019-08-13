@@ -1,15 +1,15 @@
 //
-//  JTFileManager.h
-//  JTMainProject
+//  XOFileManager.h
+//  XOBaseLib
 //
-//  Created by kenter on 2019/7/1.
+//  Created by kenter on 2019/8/13.
 //  Copyright © 2019 KENTER. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "JTMacro.h"
-#import "JTKeyChainTool.h"
-#import "NSString+JTExtension.h"
+#import "XOMacro.h"
+#import "XOKeyChainTool.h"
+#import "NSString+XOExtension.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -64,14 +64,14 @@ FOUNDATION_STATIC_INLINE NSString * JTFileUserSettingPath() {
 
 // 系统设置文件路径
 FOUNDATION_STATIC_INLINE NSString *JTFileDefaultSettingPath() {
-    return  [[NSBundle mainBundle] pathForResource:@"JTDefaultSetting" ofType:@"plist"];
+    return  [[NSBundle mainBundle] pathForResource:@"XODefaultSetting" ofType:@"plist"];
 }
 
 #pragma mark ========================= 消息相关 =========================
 
 // 当前用户
 FOUNDATION_STATIC_INLINE NSString * CurrentUserPath() {
-    NSString *userId = [JTKeyChainTool getUserName];
+    NSString *userId = [XOKeyChainTool getUserName];
     return [userId upperMD5String_32];
 }
 
@@ -145,7 +145,7 @@ FOUNDATION_STATIC_INLINE NSString * JTMsgMimeName(enum JTMsgFileType msgType) {
     return mime;
 }
 
-@interface JTFileManager : NSObject
+@interface XOFileManager : NSObject
 
 @end
 

@@ -1,8 +1,8 @@
 //
-//  JTHttpTool.h
-//  JTMainProject
+//  XOHttpTool.h
+//  XOBaseLib
 //
-//  Created by kenter on 2019/6/20.
+//  Created by kenter on 2019/8/13.
 //  Copyright © 2019 KENTER. All rights reserved.
 //
 
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 static int const JTHttpSuccessCode = 9999;
 
 
-@interface JTHttpTool : NSObject
+@interface XOHttpTool : NSObject
 
 + (instancetype)shareTool;
 

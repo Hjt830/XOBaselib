@@ -1,13 +1,13 @@
 //
-//  JTBaseLib.h
-//  JTBaseLib
+//  XOBaseLib.h
+//  XOBaseLib
 //
-//  Created by kenter on 2019/6/5.
+//  Created by kenter on 2019/8/13.
 //  Copyright © 2019 KENTER. All rights reserved.
 //
 
-#ifndef JTBaseLib_h
-#define JTBaseLib_h
+#ifndef XOBaseLib_h
+#define XOBaseLib_h
 
 #import <Foundation/Foundation.h>
 
@@ -20,32 +20,32 @@
 #import <MJRefresh/MJRefresh.h>
 
 // 配置参数
-#import "JTMacro.h"
-#import "JTBaseConfig.h"
+#import "XOMacro.h"
+#import "XOBaseConfig.h"
 
 // 工具类
-#import "JTHttpTool.h"
-#import "JTKeyChainTool.h"
-#import "JTUserDefault.h"
+#import "XOHttpTool.h"
+#import "XOKeyChainTool.h"
+#import "XOUserDefault.h"
 
 // 类扩展
-#import "NSString+JTExtension.h"
-#import "NSDateFormatter+JTExtension.h"
-#import "NSDate+JTExtension.h"
-#import "NSBundle+JTBaseLib.h"
+#import "NSString+XOExtension.h"
+#import "NSDateFormatter+XOExtension.h"
+#import "NSDate+XOExtension.h"
+#import "NSBundle+XOBaseLib.h"
 #import "UIView+Frame.h"
 
 // 管理类
-#import "JTSettingManager.h"
-#import "JTFileManager.h"
-#import "JTSmsCodeManager.h"
-#import "JTLocalPushManager.h"
+#import "XOSettingManager.h"
+#import "XOFileManager.h"
+#import "XOSmsCodeManager.h"
+#import "XOLocalPushManager.h"
 
 // Base
-#import "JTBaseViewController.h"
-#import "JTBaseTableViewController.h"
-#import "JTBaseNavigationController.h"
-#import "JTBaseTabbarController.h"
+#import "XOBaseViewController.h"
+#import "XOBaseTableViewController.h"
+#import "XOBaseNavigationController.h"
+#import "XOBaseTabbarController.h"
 
 
-#endif /* JTBaseLib_h */
+#endif /* XOBaseLib_h */
