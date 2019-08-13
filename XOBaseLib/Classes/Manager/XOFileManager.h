@@ -10,6 +10,7 @@
 #import "XOMacro.h"
 #import "XOKeyChainTool.h"
 #import "NSString+XOExtension.h"
+#import "NSBundle+XOBaseLib.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -42,7 +43,7 @@ FOUNDATION_STATIC_INLINE NSString *LibraryDirectory() {
 #pragma mark ========================= 设置相关 =========================
 
 // 用户设置文件路径
-FOUNDATION_STATIC_INLINE NSString * XOFileUserSettingPath() {
+FOUNDATION_STATIC_INLINE NSString * XOUserSettingFilePath() {
     NSString *path = @"/user/setting";
     NSString *userSettingPath = [DocumentDirectory() stringByAppendingPathComponent:path];
     // 判断目录是否存在，不存在就创建目录
@@ -63,8 +64,8 @@ FOUNDATION_STATIC_INLINE NSString * XOFileUserSettingPath() {
 }
 
 // 系统设置文件路径
-FOUNDATION_STATIC_INLINE NSString *XOFileDefaultSettingPath() {
-    return  [[NSBundle mainBundle] pathForResource:@"XODefaultSetting" ofType:@"plist"];
+FOUNDATION_STATIC_INLINE NSString *XODefaultSettingFilePath() {
+    return  [[NSBundle xo_baseLibBundle] pathForResource:@"XODefaultSetting" ofType:@"plist"];
 }
 
 #pragma mark ========================= 消息相关 =========================
@@ -83,7 +84,7 @@ FOUNDATION_STATIC_INLINE NSString * CurrentUserPath() {
  *  Location:   Document/message/MD5(currentUserId)/Location
  *  File:       Document/message/MD5(currentUserId)/File
  */
-FOUNDATION_STATIC_INLINE NSString * WXMsgFileDirectory(enum XOMsgFileType msgType) {
+FOUNDATION_STATIC_INLINE NSString * XOMsgFileDirectory(enum XOMsgFileType msgType) {
     NSString *directory = [[DocumentDirectory() stringByAppendingPathComponent:@"message"] stringByAppendingString:CurrentUserPath()];
     switch (msgType) {
         case XOMsgFileTypeImage:

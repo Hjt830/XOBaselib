@@ -82,7 +82,7 @@ static XOSettingManager * __settingManager = nil;
 - (void)loadSetting
 {
     // 读取用户偏好设置
-    if ([XOFM fileExistsAtPath:XOFileUserSettingPath()]) {
+    if ([XOFM fileExistsAtPath:XOUserSettingFilePath()]) {
         [self loadUserSetting];
     }
     // 如果用户偏好设置文件为空, 则加载系统默认设置
@@ -94,7 +94,7 @@ static XOSettingManager * __settingManager = nil;
 // 加载用户偏好设置
 - (void)loadUserSetting
 {
-    _settingDictionary = [NSDictionary dictionaryWithContentsOfFile:XOFileUserSettingPath()];
+    _settingDictionary = [NSDictionary dictionaryWithContentsOfFile:XOUserSettingFilePath()];
     _isUserSetting = YES;
     // 语言
     _language = _settingDictionary[XOLanguageOptionKey];    // 用户语言设置
@@ -107,7 +107,7 @@ static XOSettingManager * __settingManager = nil;
 // 加载系统默认设置
 - (void)loadDefaultSetting
 {
-    _settingDictionary = [NSDictionary dictionaryWithContentsOfFile:XOFileDefaultSettingPath()];
+    _settingDictionary = [NSDictionary dictionaryWithContentsOfFile:XODefaultSettingFilePath()];
     _isUserSetting = NO;
     // 语言
     _language = [[NSLocale preferredLanguages] firstObject];    // 默认跟随系统语言设置
@@ -153,7 +153,7 @@ static XOSettingManager * __settingManager = nil;
 - (void)loginIn
 {
     // 读取用户偏好设置
-    if ([XOFM fileExistsAtPath:XOFileUserSettingPath()]) {
+    if ([XOFM fileExistsAtPath:XOUserSettingFilePath()]) {
         [self loadUserSetting];
     }
     // 如果用户偏好设置文件为空, 则将系统设置拷贝一份放到用户设置路径下
@@ -177,7 +177,7 @@ static XOSettingManager * __settingManager = nil;
 - (void)generateUserSettingFile
 {
     // 根据系统默认设置初始化用户设置文件
-    NSMutableDictionary *mutSetting = [NSDictionary dictionaryWithContentsOfFile:XOFileDefaultSettingPath()].mutableCopy;
+    NSMutableDictionary *mutSetting = [NSDictionary dictionaryWithContentsOfFile:XODefaultSettingFilePath()].mutableCopy;
     // 语言
     NSString *systemLanguage = [[NSLocale preferredLanguages] firstObject];
     _language = XOIsEmptyString(systemLanguage) ? @"en" : systemLanguage;
@@ -190,7 +190,7 @@ static XOSettingManager * __settingManager = nil;
     
     // 将更新后的设置写入到用户设置目录下
     [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
-        BOOL result = [mutSetting writeToFile:XOFileUserSettingPath() atomically:YES];
+        BOOL result = [mutSetting writeToFile:XOUserSettingFilePath() atomically:YES];
         if (result) {
             self->_settingDictionary = mutSetting;
             self->_isUserSetting = YES;
@@ -205,11 +205,11 @@ static XOSettingManager * __settingManager = nil;
 // 删除一个用户设置文件
 - (void)removeUserSettingFile
 {
-    if ([XOFM fileExistsAtPath:XOFileUserSettingPath()]) {
+    if ([XOFM fileExistsAtPath:XOUserSettingFilePath()]) {
         
         [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
             NSError *removeError = nil;
-            if ([XOFM removeItemAtPath:XOFileUserSettingPath() error:&removeError]) {
+            if ([XOFM removeItemAtPath:XOUserSettingFilePath() error:&removeError]) {
                 NSLog(@"==================================================================");
                 NSLog(@"======================== 删除用户设置文件成功 ========================");
                 NSLog(@"==================================================================");
@@ -230,14 +230,14 @@ static XOSettingManager * __settingManager = nil;
 // 更新用户设置文件
 - (void)updateUserSettingWithOptionKey:(NSString * _Nonnull)optionKey optionValue:(id)value
 {
-    NSMutableDictionary *mutSetting = [NSDictionary dictionaryWithContentsOfFile:XOFileUserSettingPath()].mutableCopy;
+    NSMutableDictionary *mutSetting = [NSDictionary dictionaryWithContentsOfFile:XOUserSettingFilePath()].mutableCopy;
     [mutSetting setValue:value forKey:optionKey];
     // 将更新后的设置写入到用户设置目录下
     [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
         // 删除旧的用户设置文件
         NSError *error = nil;
-        if ([XOFM removeItemAtPath:XOFileUserSettingPath() error:&error]) {
-            if ([mutSetting writeToFile:XOFileUserSettingPath() atomically:YES]) {
+        if ([XOFM removeItemAtPath:XOUserSettingFilePath() error:&error]) {
+            if ([mutSetting writeToFile:XOUserSettingFilePath() atomically:YES]) {
                 NSLog(@"更新用户设置成功: %@ : %@", optionKey, value);
             } else {
                 NSLog(@"更新用户设置失败: %@ --- %@", optionKey, error);
