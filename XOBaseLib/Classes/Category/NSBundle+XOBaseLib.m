@@ -17,9 +17,14 @@
     NSBundle *bundle = [NSBundle bundleForClass:[XOBaseConfig class]];
     NSURL *url = [bundle URLForResource:@"XOBaseLib" withExtension:@"bundle"];
     bundle = [NSBundle bundleWithURL:url];
-    NSURL *url1 = [bundle URLForResource:@"XOBaseLib" withExtension:@"bundle"];
-    bundle = [NSBundle bundleWithURL:url1];
     return bundle;
+}
+
++ (NSBundle *)xo_baseLibResourceBundle
+{
+    NSBundle *bundle = [NSBundle xo_baseLibBundle];
+    NSURL *url = [bundle URLForResource:@"XOBaseLib" withExtension:@"bundle"];
+    bundle = [NSBundle bundleWithURL:url];
 }
 
 + (NSString *)xo_localizedStringForKey:(NSString *)key value:(NSString *)value

@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSBundle (XOBaseLib)
 
 + (NSBundle *)xo_baseLibBundle;
++ (NSBundle *)xo_baseLibResourceBundle;
 + (NSString *)xo_localizedStringForKey:(NSString *)key value:(NSString *)value;
 + (NSString *)xo_localizedStringForKey:(NSString *)key;
 
