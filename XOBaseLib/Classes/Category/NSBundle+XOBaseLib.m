@@ -34,7 +34,7 @@
 {
     NSBundle *bundle = [XOSettingManager defaultManager].languageBundle;
     NSString *value1 = [bundle localizedStringForKey:key value:value table:nil];
-    if (XOIsEmptyArray(value1)) {
+    if (XOIsEmptyString(value1)) {
         value1 = key;
     }
     return value1;
