@@ -109,8 +109,15 @@ static XOSettingManager * __settingManager = nil;
 {
     _settingDictionary = [NSDictionary dictionaryWithContentsOfFile:XODefaultSettingFilePath()];
     _isUserSetting = NO;
-    // 语言
-    _language = [[NSLocale preferredLanguages] firstObject];    // 默认跟随系统语言设置
+    // 默认跟随系统语言设置
+    NSString *systemLanguage = [[NSLocale preferredLanguages] firstObject];
+    if ([systemLanguage hasPrefix:XOLanguageNameZh_Hans]) { // 中文简体
+        _language = XOLanguageNameZh_Hans;
+    } else if ([systemLanguage hasPrefix:XOLanguageNameZh_Hant]) {
+        _language = XOLanguageNameZh_Hant;
+    } else {
+        _language = XOLanguageNameEn;
+    }
     _languageBundle = [NSBundle bundleWithPath:[[NSBundle xo_baseLibResourceBundle] pathForResource:_language ofType:@"lproj"]];
     // 字体
     _fontSize = XOFontSizeStandard;                             // 默认标准字体大小
@@ -180,7 +187,13 @@ static XOSettingManager * __settingManager = nil;
     NSMutableDictionary *mutSetting = [NSDictionary dictionaryWithContentsOfFile:XODefaultSettingFilePath()].mutableCopy;
     // 语言
     NSString *systemLanguage = [[NSLocale preferredLanguages] firstObject];
-    _language = XOIsEmptyString(systemLanguage) ? @"en" : systemLanguage;
+    if ([systemLanguage hasPrefix:XOLanguageNameZh_Hans]) { // 中文简体
+        _language = XOLanguageNameZh_Hans;
+    } else if ([systemLanguage hasPrefix:XOLanguageNameZh_Hant]) {
+        _language = XOLanguageNameZh_Hant;
+    } else {
+        _language = XOLanguageNameEn;
+    }
     [mutSetting setValue:_language forKey:XOLanguageOptionKey];
     _languageBundle = [NSBundle bundleWithPath:[[NSBundle xo_baseLibResourceBundle] pathForResource:_language ofType:@"lproj"]];
     // 字体
