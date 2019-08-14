@@ -89,13 +89,6 @@
     [SVProgressHUD dismiss];
 }
 
-- (void)viewSafeAreaInsetsDidChange
-{
-    [super viewSafeAreaInsetsDidChange];
-    
-    _safeInset = self.view.safeAreaInsets;
-}
-
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;

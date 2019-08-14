@@ -25,10 +25,6 @@ typedef NS_ENUM(NSInteger, XORequestAuthType) {
 
 @interface XOBaseViewController : UIViewController
 
-// iphoneXx以上机型的安全边缘b偏移量
-@property (nonatomic, assign, readonly) UIEdgeInsets      safeInset;
-
-
 /** 设置菜单栏的角标
  *  badgeNum: 角标数  index: 要设置的BBI的位置
  */
