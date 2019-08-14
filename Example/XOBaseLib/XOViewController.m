@@ -7,6 +7,7 @@
 //
 
 #import "XOViewController.h"
+#import <XOBaseLib/XOBaseLib.h>
 
 @interface XOViewController ()
 
@@ -17,7 +18,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	
+    NSString *str = XOLocalizedString(@"NSDateCategory.text1");
+    NSLog(@"str: %@", str);
 }
 
 - (void)didReceiveMemoryWarning
