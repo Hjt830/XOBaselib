@@ -21,7 +21,7 @@ NSString * const XOLanguageOptionKey        = @"XOLanguageOptionKey";
 // 中文简体
 XOLanguageName const XOLanguageNameZh_Hans  = @"zh-Hans";
 // 中文繁体
-XOLanguageName const XOLanguageNameZh_Hant  = @"zh_Hant";
+XOLanguageName const XOLanguageNameZh_Hant  = @"zh-Hant";
 // 英文
 XOLanguageName const XOLanguageNameEn       = @"en";
 
