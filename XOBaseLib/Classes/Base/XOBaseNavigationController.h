@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XOBaseNavigationController : UINavigationController
 
+@property (nonatomic,assign) BOOL isAlwaysShadow;
+
 @end
 
 NS_ASSUME_NONNULL_END

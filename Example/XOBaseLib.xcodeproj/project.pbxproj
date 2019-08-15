@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4EE720BB9F8B9484B6EF9B2C /* Pods_XOBaseLib_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2ABD176061B02C5FDC8A31 /* Pods_XOBaseLib_Tests.framework */; };
+		555AED222304FEDB0037C961 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 555AED212304FEDB0037C961 /* ViewController.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -42,6 +43,8 @@
 		0F2ABD176061B02C5FDC8A31 /* Pods_XOBaseLib_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XOBaseLib_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		29D7D745F1CCF2FF659FD51D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		32910EF006944546435DCB9D /* Pods-XOBaseLib_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XOBaseLib_Example.debug.xcconfig"; path = "Target Support Files/Pods-XOBaseLib_Example/Pods-XOBaseLib_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		555AED202304FEDB0037C961 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		555AED212304FEDB0037C961 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* XOBaseLib_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XOBaseLib_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -137,6 +140,8 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* XOViewController.h */,
 				6003F5A6195388D20070C39A /* XOViewController.m */,
+				555AED202304FEDB0037C961 /* ViewController.h */,
+				555AED212304FEDB0037C961 /* ViewController.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -378,6 +383,7 @@
 			files = (
 				6003F59E195388D20070C39A /* XOAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* XOViewController.m in Sources */,
+				555AED222304FEDB0037C961 /* ViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

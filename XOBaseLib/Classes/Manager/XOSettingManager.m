@@ -81,6 +81,7 @@ static XOSettingManager * __settingManager = nil;
 // 加载配置
 - (void)loadSetting
 {
+    _baseBundle = [NSBundle xo_baseLibResourceBundle];
     // 读取用户偏好设置
     if ([XOFM fileExistsAtPath:XOUserSettingFilePath()]) {
         [self loadUserSetting];
@@ -98,7 +99,7 @@ static XOSettingManager * __settingManager = nil;
     _isUserSetting = YES;
     // 语言
     _language = _settingDictionary[XOLanguageOptionKey];    // 用户语言设置
-    _languageBundle = [NSBundle bundleWithPath:[[NSBundle xo_baseLibResourceBundle] pathForResource:_language ofType:@"lproj"]];
+    _languageBundle = [NSBundle bundleWithPath:[_baseBundle pathForResource:_language ofType:@"lproj"]];
     // 字体
     NSNumber *fontNumber = _settingDictionary[XOFontSizeOptionKey];
     _fontSize = [fontNumber unsignedIntegerValue];          // 用户字体设置
@@ -118,7 +119,7 @@ static XOSettingManager * __settingManager = nil;
     } else {
         _language = XOLanguageNameEn;
     }
-    _languageBundle = [NSBundle bundleWithPath:[[NSBundle xo_baseLibResourceBundle] pathForResource:_language ofType:@"lproj"]];
+    _languageBundle = [NSBundle bundleWithPath:[_baseBundle pathForResource:_language ofType:@"lproj"]];
     // 字体
     _fontSize = XOFontSizeStandard;                             // 默认标准字体大小
 }
@@ -131,7 +132,7 @@ static XOSettingManager * __settingManager = nil;
     if (!XOIsEmptyString(language)) {
         // 改变语言
         _language = language;
-        _languageBundle = [NSBundle bundleWithPath:[[NSBundle xo_baseLibResourceBundle] pathForResource:language ofType:@"lproj"]];
+        _languageBundle = [NSBundle bundleWithPath:[_baseBundle pathForResource:language ofType:@"lproj"]];
         // 发送通知
         [[NSNotificationCenter defaultCenter] postNotificationName:XOLanguageDidChangeNotification object:@{XOLanguageOptionKey: language}];
         // 更新用户设置文件
@@ -195,7 +196,7 @@ static XOSettingManager * __settingManager = nil;
         _language = XOLanguageNameEn;
     }
     [mutSetting setValue:_language forKey:XOLanguageOptionKey];
-    _languageBundle = [NSBundle bundleWithPath:[[NSBundle xo_baseLibResourceBundle] pathForResource:_language ofType:@"lproj"]];
+    _languageBundle = [NSBundle bundleWithPath:[_baseBundle pathForResource:_language ofType:@"lproj"]];
     // 字体
     _fontSize = XOFontSizeStandard;
     NSNumber *fontNumber = [NSNumber numberWithFloat:XOFontSizeStandard];

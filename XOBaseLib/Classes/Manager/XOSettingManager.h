@@ -85,6 +85,7 @@ typedef NS_ENUM(NSInteger, XOGenralChangeType) {
 
 
 @property (nonatomic, copy, readonly) XOLanguageName       language;    // app默认设置为跟随系统设置
+@property (nonatomic, strong, readonly) NSBundle           *baseBundle;
 @property (nonatomic, strong, readonly) NSBundle           *languageBundle;
 
 @property (nonatomic, assign, readonly) XOFontSize         fontSize;     // app默认设置为XOFontSizeStandard

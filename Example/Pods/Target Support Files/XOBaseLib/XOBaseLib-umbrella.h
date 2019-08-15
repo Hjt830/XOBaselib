@@ -19,6 +19,7 @@
 #import "NSDate+XOExtension.h"
 #import "NSDateFormatter+XOExtension.h"
 #import "NSString+XOExtension.h"
+#import "UIImage+XOBaseLib.h"
 #import "UIView+Frame.h"
 #import "XOBaseConfig.h"
 #import "XOMacro.h"

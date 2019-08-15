@@ -33,6 +33,7 @@
 #import "NSDateFormatter+XOExtension.h"
 #import "NSDate+XOExtension.h"
 #import "NSBundle+XOBaseLib.h"
+#import "UIImage+XOBaseLib.h"
 #import "UIView+Frame.h"
 
 // 管理类

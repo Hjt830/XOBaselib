@@ -7,6 +7,7 @@
 //
 
 #import "XOViewController.h"
+#import "ViewController.h"
 #import <XOBaseLib/XOBaseLib.h>
 
 @interface XOViewController ()
@@ -19,8 +20,15 @@
 {
     [super viewDidLoad];
 	
-    NSString *str = XOLocalizedString(@"NSDateCategory.text1");
-    NSLog(@"str: %@", str);
+    
+    UIImage *image = [UIImage xo_imageNamedFromBaseBundle:@"back"];
+    NSLog(@"image: %@", image);
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    ViewController *vc = [[ViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
