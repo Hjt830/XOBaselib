@@ -6,8 +6,8 @@
 //  Copyright (c) 2019 kenter. All rights reserved.
 //
 
-@import UIKit;
+@import XOBaseLib;
 
-@interface XOViewController : UIViewController
+@interface XOViewController : XOBaseViewController
 
 @end

@@ -19,6 +19,9 @@
     
     self.navigationItem.hidesBackButton = NO;
     self.view.backgroundColor = [UIColor whiteColor];
+    self.title = @"title";
+    
+    [self showBackBarItem:YES];
 }
 
 /*

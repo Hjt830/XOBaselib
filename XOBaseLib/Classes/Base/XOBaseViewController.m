@@ -9,10 +9,13 @@
 #import "XOBaseViewController.h"
 #import "XOMacro.h"
 #import "NSBundle+XOBaseLib.h"
+#import "UIImage+XOBaseLib.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 
-@interface XOBaseViewController () <UINavigationControllerDelegate>
-
+@interface XOBaseViewController () <UIGestureRecognizerDelegate>
+{
+    id <UIGestureRecognizerDelegate> _delegate;
+}
 @end
 
 @implementation XOBaseViewController
@@ -66,11 +69,28 @@
     } else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
+    
+    [self showBackBarItem:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if (self.navigationController.viewControllers.count > 1) {
+        // 记录系统返回手势的代理
+        _delegate = self.navigationController.interactivePopGestureRecognizer.delegate;
+        // 设置系统返回手势的代理为当前控制器
+        self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    // 设置系统返回手势的代理为我们刚进入控制器的时候记录的系统的返回手势代理
+    self.navigationController.interactivePopGestureRecognizer.delegate = _delegate;
     
     // 隐藏悬浮的弹窗
     if ([self.presentedViewController isKindOfClass:[UIAlertController class]]) {
@@ -100,16 +120,6 @@
         return super.navigationController;
     }
     return self.tabBarController.navigationController;
-}
-
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    UIViewController *root = navigationController.viewControllers[0];
-    
-    if (root != viewController) {
-        UIBarButtonItem *itemleft = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"btn_back"] style:UIBarButtonItemStylePlain target:self action:@selector(popAction:)];
-        viewController.navigationItem.leftBarButtonItem = itemleft;
-    }
 }
 
 - (void)popAction:(UIButton *)sender
@@ -170,6 +180,29 @@
 //            }
 //        }
 //    });
+}
+
+/**
+ *  设置导航栏返回
+ */
+- (void)showBackBarItem:(BOOL)show
+{
+    if (show) {
+        if (self.navigationController.viewControllers.count > 1) {
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.frame = CGRectMake(0, 0, 40, 30);
+            [button setImage:[UIImage xo_imageNamedFromBaseBundle:@"back"] forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(popAction:) forControlEvents:UIControlEventTouchUpInside];
+            UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
+            self.navigationItem.leftBarButtonItem = item;
+        }
+        else {
+            self.navigationItem.leftBarButtonItem = nil;
+        }
+    }
+    else {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
 }
 
 /**
@@ -429,5 +462,16 @@
     }
 }
 
+#pragma mark ========================= UIGestureRecognizerDelegate =========================
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    return self.navigationController.childViewControllers.count > 1;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return self.navigationController.viewControllers.count > 1;
+}
 
 @end

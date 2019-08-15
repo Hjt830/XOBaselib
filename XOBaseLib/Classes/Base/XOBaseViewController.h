@@ -33,6 +33,7 @@ typedef NS_ENUM(NSInteger, XORequestAuthType) {
 /**
  *  设置导航栏左边、右边按钮文字或者图片
  */
+- (void)showBackBarItem:(BOOL)show;
 - (void)setLeftBarButtonTitle:(NSString  * _Nonnull)title;
 - (void)setLeftBarButtonImage:(UIImage  * _Nonnull)image;
 - (void)setRightBarButtonTitle:(NSString * _Nonnull)title;
