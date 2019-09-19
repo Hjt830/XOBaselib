@@ -429,36 +429,61 @@
 {
     NSString *tips = XOLocalizedString(@"tip.title");
     NSString *sure = XOLocalizedString(@"sure");
+    NSString *cancel = XOLocalizedString(@"cancel");
     NSString *appname = [[NSBundle mainBundle] infoDictionary][@"CFBundleDisplayName"];
     // 相机
     if (XORequestAuthCamera == authType) {
         NSString *message = [NSString stringWithFormat:XOLocalizedString(@"permission.setting.Camera.%@"), appname];
-        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:nil sureComplection:nil cancelComplection:nil];
+        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:cancel sureComplection:^() {
+            [self openAppSettingAuthorization];
+        } cancelComplection:nil];
     }
     // 相册
     else if (XORequestAuthPhotos == authType) {
         NSString *message = [NSString stringWithFormat:XOLocalizedString(@"permission.setting.Photos.%@"), appname];
-        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:nil sureComplection:nil cancelComplection:nil];
+        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:cancel sureComplection:^() {
+            [self openAppSettingAuthorization];
+        } cancelComplection:nil];
     }
     // 定位
     else if (XORequestAuthLocation == authType) {
         NSString *message = [NSString stringWithFormat:XOLocalizedString(@"permission.setting.Location.%@"), appname];
-        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:nil sureComplection:nil cancelComplection:nil];
+        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:cancel sureComplection:^() {
+            [self openAppSettingAuthorization];
+        } cancelComplection:nil];
     }
     // 麦克风
     else if (XORequestAuthMicphone == authType) {
         NSString *message = [NSString stringWithFormat:XOLocalizedString(@"permission.setting.Micphone.%@"), appname];
-        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:nil sureComplection:nil cancelComplection:nil];
+        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:nil sureComplection:^() {
+            [self openAppSettingAuthorization];
+        } cancelComplection:nil];
     }
     // 通讯录
     else if (XORequestAuthAddressBook == authType) {
         NSString *message = [NSString stringWithFormat:XOLocalizedString(@"permission.setting.AddressBook.%@"), appname];
-        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:nil sureComplection:nil cancelComplection:nil];
+        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:cancel sureComplection:^() {
+            [self openAppSettingAuthorization];
+        } cancelComplection:nil];
     }
     // 通知
     else if (XORequestAuthNotification == authType) {
         NSString *message = [NSString stringWithFormat:XOLocalizedString(@"permission.setting.Notification.%@"), appname];
-        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:nil sureComplection:nil cancelComplection:nil];
+        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:cancel sureComplection:^() {
+            [self openAppSettingAuthorization];
+        } cancelComplection:nil];
+    }
+}
+
+- (void)openAppSettingAuthorization
+{
+    NSURL *settingURL = [[NSURL alloc] initWithString:UIApplicationOpenSettingsURLString];
+    if ([[UIApplication sharedApplication] canOpenURL:settingURL]) {
+        if (@available(iOS 10.0, *)) {
+            [[UIApplication sharedApplication] openURL:settingURL options:nil completionHandler:nil];
+        } else {
+            [[UIApplication sharedApplication] openURL:settingURL];
+        }
     }
 }
 

@@ -84,12 +84,12 @@ typedef NS_ENUM(NSInteger, XOGenralChangeType) {
 @property (nonatomic, assign, readonly) BOOL               isUserSetting;
 
 
-@property (nonatomic, copy, readonly) XOLanguageName       language;    // app默认设置为跟随系统设置
+@property (nonatomic, copy, readonly) XOLanguageName       language;     // app默认设置为跟随系统设置
 @property (nonatomic, strong, readonly) NSBundle           *baseBundle;
 @property (nonatomic, strong, readonly) NSBundle           *languageBundle;
 
 @property (nonatomic, assign, readonly) XOFontSize         fontSize;     // app默认设置为XOFontSizeStandard
-
+@property (nonatomic, assign, readonly) NSString           *chatBG;      // app聊天页背景
 
 + (instancetype)defaultManager;
 
@@ -104,6 +104,16 @@ typedef NS_ENUM(NSInteger, XOGenralChangeType) {
 
 // 设置字体大小
 - (void)setAppFontSize:(XOFontSize)fontSize;
+
+/**
+ *  @brief 设置聊天背景
+ */
+- (void)setChatBGImage:(UIImage * _Nonnull)bgImage
+           complection:(void(^)(BOOL finish, UIImage *bgImage, NSError *error))handler;
+/**
+ *  @brief 获取聊天背景图片
+ */
+- (void)getCurrentChatBGImage:(void(^)(BOOL finish, UIImage * _Nullable bgImage))handler;
 
 
 @end

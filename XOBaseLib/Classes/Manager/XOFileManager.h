@@ -40,26 +40,31 @@ FOUNDATION_STATIC_INLINE NSString *LibraryDirectory() {
     return [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
 }
 
+// 用户设置文件夹
+FOUNDATION_STATIC_INLINE NSString * XOUserSettingDirectory() {
+    NSString *path = @"/user/setting";
+    NSString *userSettingDirectory = [DocumentDirectory() stringByAppendingPathComponent:path];
+    // 判断目录是否存在，不存在就创建目录
+    BOOL isDirectory = NO;
+    BOOL isExist = [XOFM fileExistsAtPath:userSettingDirectory isDirectory:&isDirectory];
+    if (!(isDirectory && isExist)) {
+        NSError *error = nil;
+        BOOL isCreate = [XOFM createDirectoryAtPath:userSettingDirectory withIntermediateDirectories:YES attributes:nil error:&error];
+        if (!isCreate) {
+            NSLog(@"文件路径创建失败: %@", userSettingDirectory);
+        }
+    }
+    
+    return userSettingDirectory;
+}
+
 #pragma mark ========================= 设置相关 =========================
 
 // 用户设置文件路径
 FOUNDATION_STATIC_INLINE NSString * XOUserSettingFilePath() {
-    NSString *path = @"/user/setting";
-    NSString *userSettingPath = [DocumentDirectory() stringByAppendingPathComponent:path];
-    // 判断目录是否存在，不存在就创建目录
-    BOOL isDirectory = NO;
-    BOOL isExist = [XOFM fileExistsAtPath:userSettingPath isDirectory:&isDirectory];
-    if (!(isDirectory && isExist)) {
-        NSError *error = nil;
-        BOOL isCreate = [XOFM createDirectoryAtPath:userSettingPath withIntermediateDirectories:YES attributes:nil error:&error];
-        if (!isCreate) {
-            NSLog(@"文件路径创建失败: %@", userSettingPath);
-        }
-    }
     // 用户设置文件名
     NSString *settingFile = @"XOUserSetting.plist";
-    userSettingPath = [userSettingPath stringByAppendingPathComponent:settingFile];
-    
+    NSString *userSettingPath = [XOUserSettingDirectory() stringByAppendingPathComponent:settingFile];
     return userSettingPath;
 }
 

@@ -10,6 +10,7 @@
 #import "XOFileManager.h"
 #import "XOMacro.h"
 #import "XOBaseConfig.h"
+#import "XOKeyChainTool.h"
 #import "NSBundle+XOBaseLib.h"
 #import <MJRefresh/MJRefreshConfig.h>
 
@@ -103,6 +104,8 @@ static XOSettingManager * __settingManager = nil;
     // 字体
     NSNumber *fontNumber = _settingDictionary[XOFontSizeOptionKey];
     _fontSize = [fontNumber unsignedIntegerValue];          // 用户字体设置
+    // 聊天背景
+    _chatBG = _settingDictionary[XOChatBackgroundOptionKey];
 }
 
 // 加载系统默认设置
@@ -122,6 +125,8 @@ static XOSettingManager * __settingManager = nil;
     _languageBundle = [NSBundle bundleWithPath:[_baseBundle pathForResource:_language ofType:@"lproj"]];
     // 字体
     _fontSize = XOFontSizeStandard;                             // 默认标准字体大小
+    // 聊天背景
+    _chatBG = @"default";
 }
 
 #pragma mark ========================= setter =========================
@@ -153,6 +158,78 @@ static XOSettingManager * __settingManager = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:XOFontSizeDidChangeNotification object:@{XOFontSizeOptionKey: fontNumber}];
     // 更新用户设置文件
     [self updateUserSettingWithOptionKey:XOFontSizeOptionKey optionValue:fontNumber];
+}
+
+/**
+ *  @brief 设置聊天背景
+ */
+- (void)setChatBGImage:(UIImage * _Nonnull)bgImage complection:(void(^)(BOOL finish, UIImage *bgImage, NSError *error))handler
+{
+    if (!bgImage) {
+        if (handler) {
+            NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain code:404 userInfo:@{@"userInfo": @"bgImage is empty, can not save"}];
+            handler (NO, nil, error);
+        }
+    }
+    else {
+        __block NSString *imageName = [NSString stringWithFormat:@"%@.png", [XOKeyChainTool getUserName]];
+        __block NSString *imagePath = [XOUserSettingDirectory() stringByAppendingPathComponent:imageName];
+        [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
+            
+            NSData *imageData = UIImagePNGRepresentation(bgImage);
+            NSError *error = nil;
+            if ([imageData writeToFile:imagePath options:NSDataWritingWithoutOverwriting error:&error]) {
+                
+                self->_chatBG = imageName;
+                [self updateUserSettingWithOptionKey:XOChatBackgroundOptionKey optionValue:imageName];
+                
+                if (handler) {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        handler (YES, bgImage, nil);
+                    }];
+                }
+            }
+            else {
+                if (handler) {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        handler (NO, bgImage, error);
+                    }];
+                }
+            }
+        }];
+    }
+}
+
+/**
+ *  @brief 获取聊天背景图片
+ */
+- (void)getCurrentChatBGImage:(void(^)(BOOL finish, UIImage * _Nullable bgImage))handler
+{
+    if (XOIsEmptyString(_chatBG) || [_chatBG isEqualToString:@"default"]) {
+        if (handler) handler (NO, nil);
+    }
+    else {
+        __block NSString *chatImagePath = [XOUserSettingDirectory() stringByAppendingPathComponent:_chatBG];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:chatImagePath]) {
+            if (handler) handler (NO, nil);
+        }
+        else {
+            [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
+                NSData *imageData = [NSData dataWithContentsOfFile:chatImagePath];
+                if (imageData.length > 0) {
+                    __block UIImage *image = [UIImage imageWithData:imageData];
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        if (handler) handler (YES, image);
+                    }];
+                }
+                else {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        if (handler) handler (NO, nil);
+                    }];
+                }
+            }];
+        }
+    }
 }
 
 #pragma mark ========================= public =========================
