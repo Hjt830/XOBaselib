@@ -90,22 +90,22 @@ FOUNDATION_STATIC_INLINE NSString * CurrentUserPath() {
  *  File:       Document/message/MD5(currentUserId)/File
  */
 FOUNDATION_STATIC_INLINE NSString * XOMsgFileDirectory(enum XOMsgFileType msgType) {
-    NSString *directory = [[DocumentDirectory() stringByAppendingPathComponent:@"message"] stringByAppendingString:CurrentUserPath()];
+    NSString *directory = [[DocumentDirectory() stringByAppendingPathComponent:@"message"] stringByAppendingPathComponent:CurrentUserPath()];
     switch (msgType) {
         case XOMsgFileTypeImage:
-            directory = [directory stringByAppendingString:@"Image"];
+            directory = [directory stringByAppendingPathComponent:@"Image"];
             break;
         case XOMsgFileTypeAudio:
-            directory = [directory stringByAppendingString:@"Audio"];
+            directory = [directory stringByAppendingPathComponent:@"Audio"];
             break;
         case XOMsgFileTypeVideo:
-            directory = [directory stringByAppendingString:@"Video"];
+            directory = [directory stringByAppendingPathComponent:@"Video"];
             break;
         case XOMsgFileTypeLocation:
-            directory = [directory stringByAppendingString:@"Location"];
+            directory = [directory stringByAppendingPathComponent:@"Location"];
             break;
         case XOMsgFileTypeFile:
-            directory = [directory stringByAppendingString:@"File"];
+            directory = [directory stringByAppendingPathComponent:@"File"];
             break;
         default:
             break;
