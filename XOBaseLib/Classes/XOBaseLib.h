@@ -12,6 +12,7 @@
 #import <Foundation/Foundation.h>
 
 // 第三方库
+#import <AFNetworking/AFNetworking.h>
 #import <SDWebImage/SDWebImageManager.h>
 #import <SDWebImage/SDImageCache.h>
 #import <SDWebImage/SDWebImageDownloader.h>
