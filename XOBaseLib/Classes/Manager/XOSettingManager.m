@@ -325,16 +325,26 @@ static XOSettingManager * __settingManager = nil;
     [mutSetting setValue:value forKey:optionKey];
     // 将更新后的设置写入到用户设置目录下
     [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
-        // 删除旧的用户设置文件
-        NSError *error = nil;
-        if ([XOFM removeItemAtPath:XOUserSettingFilePath() error:&error]) {
+        //有旧文件先删除
+        if ([[NSFileManager defaultManager] fileExistsAtPath:XOUserSettingFilePath()]) {
+            NSError *error = nil;
+            if ([XOFM removeItemAtPath:XOUserSettingFilePath() error:&error]) {
+                if ([mutSetting writeToFile:XOUserSettingFilePath() atomically:YES]) {
+                    NSLog(@"更新用户设置成功: %@ : %@", optionKey, value);
+                } else {
+                    NSLog(@"更新用户设置失败: %@ --- %@", optionKey, error);
+                }
+            } else {
+                NSLog(@"更新用户设置文件失败: %@ --- %@", optionKey, error);
+            }
+        }
+        // 没有直接写入
+        else {
             if ([mutSetting writeToFile:XOUserSettingFilePath() atomically:YES]) {
                 NSLog(@"更新用户设置成功: %@ : %@", optionKey, value);
             } else {
-                NSLog(@"更新用户设置失败: %@ --- %@", optionKey, error);
+                NSLog(@"更新用户设置失败: %@", optionKey);
             }
-        } else {
-            NSLog(@"更新用户设置文件失败: %@ --- %@", optionKey, error);
         }
     }];
 }
