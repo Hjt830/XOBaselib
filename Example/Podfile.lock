@@ -21,7 +21,7 @@ PODS:
   - SDWebImage/Core (5.0.6)
   - SVProgressHUD (2.2.5)
   - TZImagePickerController (3.2.1)
-  - XOBaseLib (0.2.1):
+  - XOBaseLib (0.2.2):
     - AFNetworking (~> 3.2.1)
     - GTMBase64 (~> 1.0.1)
     - MJRefresh (~> 3.2.0)
@@ -33,7 +33,7 @@ DEPENDENCIES:
   - XOBaseLib (from `../`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - GTMBase64
     - MJRefresh
@@ -52,8 +52,8 @@ SPEC CHECKSUMS:
   SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TZImagePickerController: bf4c57b98d8707fce41ea6be872414a71c7a8c9d
-  XOBaseLib: 17d0276be7e677b54b67ddc5d005bc561b0b288b
+  XOBaseLib: efeba3f62c598b38436bd91762fc26454d0da264
 
-PODFILE CHECKSUM: f5e900e82195e93b86a2eae979d0af4b0c9024e6
+PODFILE CHECKSUM: 81f1da12640a476b8e66120a8c37b78432daec84
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.3

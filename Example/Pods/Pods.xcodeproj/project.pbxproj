@@ -2519,12 +2519,13 @@
 			};
 			name = Release;
 		};
-		30F4DD48F54C57379AB42D8BFABC5BFB /* Release */ = {
+		23E9418E2CFE54593CA16E1ABDC2631A /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 01738C28E812C35EA5A59B29375A88C9 /* XOBaseLib.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/XOBaseLib";
+				IBSC_MODULE = XOBaseLib;
 				INFOPLIST_FILE = "Target Support Files/XOBaseLib/ResourceBundle-XOBaseLib-XOBaseLib-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = XOBaseLib;
@@ -2657,22 +2658,6 @@
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
-		};
-		54D885E05991E4CC7860600E1E920AB7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01738C28E812C35EA5A59B29375A88C9 /* XOBaseLib.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/XOBaseLib";
-				INFOPLIST_FILE = "Target Support Files/XOBaseLib/ResourceBundle-XOBaseLib-XOBaseLib-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = XOBaseLib;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
 		};
 		607A3133EEDCA9911103515E22C30EBC /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -3156,6 +3141,23 @@
 			};
 			name = Debug;
 		};
+		D7529166EA52EEF52763351C52EC2606 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01738C28E812C35EA5A59B29375A88C9 /* XOBaseLib.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/XOBaseLib";
+				IBSC_MODULE = XOBaseLib;
+				INFOPLIST_FILE = "Target Support Files/XOBaseLib/ResourceBundle-XOBaseLib-XOBaseLib-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = XOBaseLib;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3180,8 +3182,8 @@
 		3220A0E0F6298F298D2C23A8B48A2394 /* Build configuration list for PBXNativeTarget "XOBaseLib-XOBaseLib" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				54D885E05991E4CC7860600E1E920AB7 /* Debug */,
-				30F4DD48F54C57379AB42D8BFABC5BFB /* Release */,
+				D7529166EA52EEF52763351C52EC2606 /* Debug */,
+				23E9418E2CFE54593CA16E1ABDC2631A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

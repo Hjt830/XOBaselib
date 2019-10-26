@@ -243,7 +243,7 @@ static XOSettingManager * __settingManager = nil;
     }
     // 如果用户偏好设置文件为空, 则将系统设置拷贝一份放到用户设置路径下
     else {
-        [self generateUserSettingFile];
+        [self generateUserSettingFile:NULL];
     }
 }
 
@@ -259,7 +259,7 @@ static XOSettingManager * __settingManager = nil;
 #pragma mark ========================= 用户设置文件操作 =========================
 
 // 生成一个用户设置文件, 并保存到用户设置文件路径
-- (void)generateUserSettingFile
+- (void)generateUserSettingFile:(void(^)(BOOL finish))handler
 {
     // 根据系统默认设置初始化用户设置文件
     NSMutableDictionary *mutSetting = [NSDictionary dictionaryWithContentsOfFile:XODefaultSettingFilePath()].mutableCopy;
@@ -289,6 +289,9 @@ static XOSettingManager * __settingManager = nil;
             NSLog(@"==================================================================");
             NSLog(@"======================== 配置用户设置文件成功 ========================");
             NSLog(@"==================================================================");
+        }
+        if (handler) {
+            handler (result);
         }
     }];
 }
@@ -321,32 +324,41 @@ static XOSettingManager * __settingManager = nil;
 // 更新用户设置文件
 - (void)updateUserSettingWithOptionKey:(NSString * _Nonnull)optionKey optionValue:(id)value
 {
-    NSMutableDictionary *mutSetting = [NSDictionary dictionaryWithContentsOfFile:XOUserSettingFilePath()].mutableCopy;
-    [mutSetting setValue:value forKey:optionKey];
-    // 将更新后的设置写入到用户设置目录下
-    [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
-        //有旧文件先删除
-        if ([[NSFileManager defaultManager] fileExistsAtPath:XOUserSettingFilePath()]) {
-            NSError *error = nil;
-            if ([XOFM removeItemAtPath:XOUserSettingFilePath() error:&error]) {
+    if (_isUserSetting) {
+        NSMutableDictionary *mutSetting = [NSDictionary dictionaryWithContentsOfFile:XOUserSettingFilePath()].mutableCopy;
+        [mutSetting setValue:value forKey:optionKey];
+        // 将更新后的设置写入到用户设置目录下
+        [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
+            //有旧文件先删除
+            if ([[NSFileManager defaultManager] fileExistsAtPath:XOUserSettingFilePath()]) {
+                NSError *error = nil;
+                if ([XOFM removeItemAtPath:XOUserSettingFilePath() error:&error]) {
+                    if ([mutSetting writeToFile:XOUserSettingFilePath() atomically:YES]) {
+                        NSLog(@"更新用户设置成功: %@ : %@", optionKey, value);
+                    } else {
+                        NSLog(@"更新用户设置失败: %@ --- %@", optionKey, error);
+                    }
+                } else {
+                    NSLog(@"更新用户设置文件失败: %@ --- %@", optionKey, error);
+                }
+            }
+            // 没有直接写入
+            else {
                 if ([mutSetting writeToFile:XOUserSettingFilePath() atomically:YES]) {
                     NSLog(@"更新用户设置成功: %@ : %@", optionKey, value);
                 } else {
-                    NSLog(@"更新用户设置失败: %@ --- %@", optionKey, error);
+                    NSLog(@"更新用户设置失败: %@", optionKey);
                 }
-            } else {
-                NSLog(@"更新用户设置文件失败: %@ --- %@", optionKey, error);
             }
-        }
-        // 没有直接写入
-        else {
-            if ([mutSetting writeToFile:XOUserSettingFilePath() atomically:YES]) {
-                NSLog(@"更新用户设置成功: %@ : %@", optionKey, value);
-            } else {
-                NSLog(@"更新用户设置失败: %@", optionKey);
+        }];
+    }
+    else {
+        [self generateUserSettingFile:^(BOOL finish) {
+            if (finish) {
+                [self updateUserSettingWithOptionKey:optionKey optionValue:value];
             }
-        }
-    }];
+        }];
+    }
 }
 
 
