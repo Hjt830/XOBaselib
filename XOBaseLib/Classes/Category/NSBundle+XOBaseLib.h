@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#define XOLocalizedString(key) ([NSBundle xo_localizedStringForKey:(key)])
+
 @interface NSBundle (XOBaseLib)
 
 + (NSBundle *)xo_baseLibBundle;

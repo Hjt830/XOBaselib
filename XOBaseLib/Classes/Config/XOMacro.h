@@ -11,7 +11,6 @@
 
 #import <Foundation/Foundation.h>
 
-#define XOLocalizedString(key) ([NSBundle xo_localizedStringForKey:(key)])
 
 #pragma mark ====================== 字体 ======================
 
