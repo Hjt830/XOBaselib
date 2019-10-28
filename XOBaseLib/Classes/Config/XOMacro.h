@@ -24,11 +24,11 @@
 #pragma mark ====================== 尺寸 ======================
 
 /// 设备的宽
-#define KWIDTH      [UIScreen mainScreen].bounds.size.width
+#define SCREEN_WIDTH      [UIScreen mainScreen].bounds.size.width
 /// 设备的高
-#define KHEIGHT     [UIScreen mainScreen].bounds.size.height
+#define SCREEN_HEIGHT     [UIScreen mainScreen].bounds.size.height
 /// 设备的缩放比例
-#define KSCALE      [UIScreen mainScreen].scale
+#define SCREEN_SCALE            [UIScreen mainScreen].scale
 
 /// 是否是iphone5系列
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
