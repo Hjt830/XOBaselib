@@ -243,7 +243,9 @@ static XOSettingManager * __settingManager = nil;
     }
     // 如果用户偏好设置文件为空, 则将系统设置拷贝一份放到用户设置路径下
     else {
-        [self generateUserSettingFile:NULL];
+        [self generateUserSettingFile:^(BOOL finish) {
+            [self loadSetting];
+        }];
     }
 }
 

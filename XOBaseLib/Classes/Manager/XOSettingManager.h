@@ -93,6 +93,8 @@ typedef NS_ENUM(NSInteger, XOGenralChangeType) {
 
 + (instancetype)defaultManager;
 
+- (void)loadSetting;
+
 // 登录成功
 - (void)loginIn;
 
