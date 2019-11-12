@@ -85,6 +85,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)pinyinString;
 
+#pragma mark ========================= 获取设备名称 =========================
+
++ (NSString *)getDeviceName;
 
 
 @end

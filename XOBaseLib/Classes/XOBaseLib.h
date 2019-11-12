@@ -48,6 +48,7 @@
 #import "XOBaseTableViewController.h"
 #import "XOBaseNavigationController.h"
 #import "XOBaseTabbarController.h"
+#import "XOBaseModel.h"
 
 
 #endif /* XOBaseLib_h */

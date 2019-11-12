@@ -21,6 +21,7 @@
 #import "NSString+XOExtension.h"
 #import "UIImage+XOBaseLib.h"
 #import "UIView+Frame.h"
+#import "UIViewController+XOExtension.h"
 #import "XOBaseConfig.h"
 #import "XOMacro.h"
 #import "XOFileManager.h"

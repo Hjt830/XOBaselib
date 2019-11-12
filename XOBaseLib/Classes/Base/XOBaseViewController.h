@@ -11,18 +11,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
-/// 请求权限的类型
-typedef NS_ENUM(NSInteger, XORequestAuthType) {
-    XORequestAuthPhotos  = 200,     // 相册
-    XORequestAuthCamera   = 201,    // 相机
-    XORequestAuthLocation = 202,    // 定位
-    XORequestAuthMicphone = 203,    // 麦克风
-    XORequestAuthAddressBook = 204, // 通讯录
-    XORequestAuthNotification = 205,// 通知
-};
-
-
 @interface XOBaseViewController : UIViewController
 
 /** 设置菜单栏的角标
@@ -57,39 +45,6 @@ typedef NS_ENUM(NSInteger, XORequestAuthType) {
  *  @param userInfo 改变后的通用数据
  */
 - (void)refreshByGenralSettingChange:(XOGenralChangeType)genralType userInfo:(NSDictionary *_Nonnull)userInfo;
-
-
-/**
- *  弹框提醒 alert
- */
-- (void)showAlertWithTitle:(NSString * _Nullable)title
-                   message:(NSString * _Nullable)message
-                 sureTitle:(NSString * _Nullable)sureTitle
-               cancelTitle:(NSString * _Nullable)cancelTitle
-           sureComplection:(void(^_Nullable)(void))sureComplection
-         cancelComplection:(void(^_Nullable)(void))cancelComplection;
-
-
-/**
- *  选择框 sheet
- */
-- (void)showSheetWithTitle:(NSString * _Nullable)title
-                   message:(NSString * _Nullable)message
-                   actions:(NSArray <NSString *> * _Nonnull)actions
-                  redIndex:(NSNumber * _Nullable)redIndex
-               complection:(void(^_Nullable)(int index, NSString * _Nullable title))complection
-         cancelComplection:(void(^_Nullable)(void))cancelComplection;
-
-/**
- *  显示照片选择
- */
-- (void)showPickerPhoto:(void(^_Nullable)(void))takePicture
-           photoLibrary:(void(^_Nullable)(void))photoLibrary;
-
-/**
- *  提示打开权限
- */
-- (void)showAlertAuthor:(XORequestAuthType)authType;
     
 @end
 
