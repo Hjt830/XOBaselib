@@ -28,7 +28,6 @@
 #import "XOLocalPushManager.h"
 #import "XOSettingManager.h"
 #import "XOSmsCodeManager.h"
-#import "XOHttpTool.h"
 #import "XOKeyChainTool.h"
 #import "XOUserDefault.h"
 #import "XOBaseLib.h"

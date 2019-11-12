@@ -25,7 +25,6 @@
 #import "XOBaseConfig.h"
 
 // 工具类
-#import "XOHttpTool.h"
 #import "XOKeyChainTool.h"
 #import "XOUserDefault.h"
 
