@@ -20,19 +20,17 @@
 		<true/>
 	</dict>
 	<key>XONotificationOptionKey</key>
-	<array>
-		<dict>
-			<key>XONewMessageNotificationKey</key>
-			<true/>
-			<key>XOCallRemindNotificationKey</key>
-			<true/>
-			<key>XOShowDetailNotificationKey</key>
-			<true/>
-			<key>XONotificationSoundKey</key>
-			<true/>
-			<key>XONotificationVibrateKey</key>
-			<true/>
-		</dict>
-	</array>
+	<dict>
+		<key>XONewMessageNotificationKey</key>
+        <true/>
+        <key>XOCallRemindNotificationKey</key>
+        <true/>
+        <key>XOShowDetailNotificationKey</key>
+        <true/>
+        <key>XONotificationSoundKey</key>
+        <true/>
+        <key>XONotificationVibrateKey</key>
+        <true/>
+	</dict>
 </dict>
 </plist>
