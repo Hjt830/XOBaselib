@@ -190,7 +190,8 @@
     if (show) {
         if (self.navigationController.viewControllers.count > 1) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(0, 0, 40, 30);
+            button.frame = CGRectMake(0, 0, 64, 44);
+            [button setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 10)];
             [button setImage:[UIImage xo_imageNamedFromBaseBundle:@"back"] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(popAction:) forControlEvents:UIControlEventTouchUpInside];
             UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];

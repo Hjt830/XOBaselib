@@ -82,7 +82,8 @@ typedef NS_ENUM(NSInteger, XOGenralChangeType) {
 
 // app当前使用的是否为用户偏好设置 (登录状态下, 使用用户偏好设置 --- YES,  未登录状态下, 使用系统默认设置 --- NO)
 @property (nonatomic, assign, readonly) BOOL               isUserSetting;
-
+// 设置表属性
+@property (nonatomic, strong, readonly) NSDictionary       *settingDictionary;
 
 @property (nonatomic, copy, readonly) XOLanguageName       language;     // app默认设置为跟随系统设置
 @property (nonatomic, strong, readonly) NSBundle           *baseBundle;

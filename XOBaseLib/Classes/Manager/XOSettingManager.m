@@ -51,10 +51,6 @@ static XOSettingManager * __settingManager = nil;
 
 @interface XOSettingManager ()
 
-// 设置表属性
-@property (nonatomic, strong) NSDictionary  *settingDictionary;
-
-
 @end
 
 @implementation XOSettingManager
