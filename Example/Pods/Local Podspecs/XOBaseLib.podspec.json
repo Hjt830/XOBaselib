@@ -1,6 +1,6 @@
 {
   "name": "XOBaseLib",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "summary": "XXOOGO项目的基础模块",
   "description": "XXOOGO项目采用cocoapods做组件化架构，将不同的模块使用pod私有仓库管理，只需要在主项目中使用 pod 'XOBaseLib' 即可导入模块使用",
   "homepage": "http://192.168.1.119/xxoogo_livechat/xobaselib",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "http://192.168.1.119/xxoogo_livechat/xobaselib.git",
-    "tag": "0.3.0"
+    "tag": "0.3.1"
   },
   "social_media_url": "https://www.jianshu.com/u/7e5e59276b03",
   "platforms": {
