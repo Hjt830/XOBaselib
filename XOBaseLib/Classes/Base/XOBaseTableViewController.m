@@ -179,7 +179,7 @@
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell;
     }
-    return 0;
+    return [[UITableViewCell alloc] init];
 }
 
 - (void)refreshByGenralSettingChange:(XOGenralChangeType)genralType userInfo:(NSDictionary *)userInfo

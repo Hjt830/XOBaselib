@@ -7,7 +7,6 @@
 //
 
 #import "XOViewController.h"
-#import "ViewController.h"
 #import <XOBaseLib/XOBaseLib.h>
 
 @interface XOViewController ()
@@ -27,8 +26,7 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    ViewController *vc = [[ViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning

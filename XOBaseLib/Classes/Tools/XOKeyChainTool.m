@@ -135,7 +135,7 @@ static NSString * XOKeyChainIv = nil;
 /** @brief 对字符串加密处理
  *  @param param 要加密的字符串
  */
-+ (NSString *_Nonnull)encryptString:(nonnull NSString *)param
++ (NSString *_Nullable)encryptString:(nonnull NSString *)param
 {
     if (XOIsEmptyString(param)) {
         return nil;

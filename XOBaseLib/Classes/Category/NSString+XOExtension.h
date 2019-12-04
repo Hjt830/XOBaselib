@@ -37,13 +37,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param key 加密秘钥
  *  @param iv 加密向量
  */
-- (NSString *)aes128_encrypto:(NSString *)key iv:(NSString *)iv;
+- (NSString * _Nullable)aes128_encrypto:(NSString *)key iv:(NSString *)iv;
 
 /** @brief aes 128位 CBC PKCS7Padding解密
  *  @param key 解密秘钥
  *  @param iv 解密向量
  */
-- (NSString *)aes128_decrypto:(NSString *)key iv:(NSString *)iv;
+- (NSString * _Nullable)aes128_decrypto:(NSString *)key iv:(NSString *)iv;
     
 
 #pragma mark ====================== HMAC =======================
@@ -81,13 +81,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark ====================== 中文转拼音 =======================
 
-- (NSString *)convertToPinyin;
+- (NSString * _Nullable)convertToPinyin;
 
-- (NSString *)pinyinString;
+- (NSString * _Nonnull)pinyinString;
 
 #pragma mark ========================= 获取设备名称 =========================
 
-+ (NSString *)getDeviceName;
++ (NSString * _Nonnull)getDeviceName;
 
 
 @end

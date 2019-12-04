@@ -92,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 // 返回星期几
-- (NSString *)weekdayString;
+- (NSString * _Nullable)weekdayString;
 
 @end
 

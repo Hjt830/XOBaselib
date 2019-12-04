@@ -524,7 +524,7 @@
 
 
 // 返回星期几
-- (NSString *)weekdayString
+- (NSString * _Nullable)weekdayString
 {
     NSString *weekDayStr = nil;
     NSInteger weekday = [self weekday];

@@ -78,7 +78,7 @@
  *  @param key 加密秘钥
  *  @param iv 加密向量
  */
-- (NSString *)aes128_encrypto:(NSString *)key iv:(NSString *)iv
+- (NSString * _Nullable)aes128_encrypto:(NSString *)key iv:(NSString *)iv
 {
     char keyPtr[kCCKeySizeAES128 + 1];  // C的数组有一位是空格
     memset(keyPtr, 0, sizeof(keyPtr));
@@ -125,7 +125,7 @@
  *  @param key 解密秘钥
  *  @param iv 解密向量
  */
-- (NSString *)aes128_decrypto:(NSString *)key iv:(NSString *)iv
+- (NSString * _Nullable)aes128_decrypto:(NSString *)key iv:(NSString *)iv
 {
     char keyPtr[kCCKeySizeAES128 + 1];
     memset(keyPtr, 0, sizeof(keyPtr));
@@ -212,9 +212,11 @@
 {
     CFUUIDRef puuid = CFUUIDCreate(nil);
     CFStringRef uuidString = CFUUIDCreateString(nil, puuid);
-    NSString *result = (__bridge NSString *)CFStringCreateCopy(NULL, uuidString);
+    CFStringRef res = CFStringCreateCopy(NULL, uuidString);
     CFRelease(puuid);
     CFRelease(uuidString);
+    NSString *result = (__bridge NSString *)res;
+    CFRelease(res);
     return result;
 }
 
@@ -267,7 +269,7 @@
 
 #pragma mark ====================== 中文转拼音 =======================
 
-- (NSString *)convertToPinyin
+- (NSString * _Nullable)convertToPinyin
 {
     if (XOIsEmptyString(self)) return nil;
     
