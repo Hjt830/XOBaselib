@@ -35,6 +35,7 @@
 #import "NSBundle+XOBaseLib.h"
 #import "UIImage+XOBaseLib.h"
 #import "UIView+Frame.h"
+#import "UIColor+XOExtension.h"
 #import "UIViewController+XOExtension.h"
 
 // 管理类

@@ -7,6 +7,7 @@
 //
 
 #import "XOBaseNavigationController.h"
+#import "UIColor+XOExtension.h"
 
 @interface XOBaseNavigationController () <UIGestureRecognizerDelegate>
 
@@ -19,7 +20,7 @@
     [[UINavigationBar appearance] setBarStyle:UIBarStyleDefault];
     [[UINavigationBar appearance] setTranslucent:NO];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blackColor],
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor XOTextColor],
                                                            NSFontAttributeName: [UIFont boldSystemFontOfSize:19.0f]}];
 }
 
