@@ -10,6 +10,7 @@
 #import "XOMacro.h"
 #import "NSBundle+XOBaseLib.h"
 #import "UIImage+XOBaseLib.h"
+#import "UIColor+XOExtension.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 
 @interface XOBaseViewController () <UIGestureRecognizerDelegate>
@@ -58,7 +59,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor groupTableViewColor];
     
     if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
         [self setEdgesForExtendedLayout:UIRectEdgeNone];
@@ -82,6 +83,16 @@
         _delegate = self.navigationController.interactivePopGestureRecognizer.delegate;
         // 设置系统返回手势的代理为当前控制器
         self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    }
+    
+    // tabbarVC的基础控制器的导航栏置空
+    NSArray <UIViewController *>*viewControllers = self.tabBarController.viewControllers;
+    if (viewControllers.count > 0 && [viewControllers containsObject:self]) {
+        self.navigationItem.titleView = nil;
+        self.navigationItem.leftBarButtonItem = nil;
+        self.navigationItem.leftBarButtonItems = nil;
+        self.navigationItem.rightBarButtonItem = nil;
+        self.navigationItem.rightBarButtonItems = nil;
     }
 }
 
@@ -120,6 +131,15 @@
         return super.navigationController;
     }
     return self.tabBarController.navigationController;
+}
+
+- (UINavigationItem *)navigationItem
+{
+    UITabBarController *tabBarVC = self.tabBarController;
+    if (tabBarVC) {
+        return self.tabBarController.navigationItem;
+    }
+    return [super navigationItem];
 }
 
 - (void)popAction:(UIButton *)sender
