@@ -10,7 +10,7 @@
 #define XOMacro_h
 
 #import <Foundation/Foundation.h>
-
+#import "XOBaseConfig.h"
 
 #pragma mark ====================== 字体 ======================
 
@@ -24,26 +24,31 @@
 #pragma mark ====================== 尺寸 ======================
 
 /// 设备的宽
-#define SCREEN_WIDTH      [UIScreen mainScreen].bounds.size.width
+#define SCREEN_WIDTH            [UIScreen mainScreen].bounds.size.width
 /// 设备的高
-#define SCREEN_HEIGHT     [UIScreen mainScreen].bounds.size.height
+#define SCREEN_HEIGHT           [UIScreen mainScreen].bounds.size.height
 /// 设备的缩放比例
 #define SCREEN_SCALE            [UIScreen mainScreen].scale
 
-/// 是否是iphone5系列
-#define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
-
 /// 是否是iOS10
-#define isiOS10 ([[UIDevice currentDevice].systemVersion floatValue] >= 10)
+#define isiOS10                 ([[UIDevice currentDevice].systemVersion floatValue] >= 10)
 
 /// 导航栏高度
-#define NavigationHeight    (self.navigationController  == nil ?  \
-                            self.tabBarController.navigationController.navigationBar.height : self.navigationController.navigationBar.height)
+#define NavigationHeight        (self.navigationController  == nil ?  \
+                                    self.tabBarController.navigationController.navigationBar.height : self.navigationController.navigationBar.height)
 /// tabbar高度
-#define TabbarHeight        (self.tabBarController.tabBar.height)
+#define TabbarHeight            (self.tabBarController.tabBar.height)
 
 /// 状态栏高度
-#define StatusBarHeight     ([UIApplication sharedApplication].statusBarFrame.size.height)
+#define StatusBarHeight         ([UIApplication sharedApplication].statusBarFrame.size.height)
+
+// 是否是 iphoneX 以上机型
+#define IS_IPHONE_X                     ([[UIScreen mainScreen] bounds].size.height >= 812.0f)
+
+#define StatusHeight                    [[UIApplication sharedApplication] statusBarFrame].size.height
+#define NavHFit                         (IS_IPHONE_X ? 88 : 64) // iphonex  导航栏高度 88  iphonex 以下均为64
+#define TabHFit                         (IS_IPHONE_X ? 83 : 49) // iphonex
+#define SafeBottomHeight                (IS_IPHONE_X ? 34 : 0)  //底部圆弧高度
 
 
 #define HEIGHT_STATUSBAR    20 // 状态栏
@@ -81,7 +86,7 @@
 
 /////////////////// App相关配色
 
-#define AppTinColor                     RGBOF(0x7c4dff)         // App主题色
+#define AppTinColor                     [XOBaseConfig defaultConfig].appTintColor  // App主题色
 
 #define MainPurpleColor                 RGBOF(0x7c4dff)         // 主色,紫色
 #define MainPurpleLightColor            RGBOF(0xb388ff)         // 明亮主色,紫色
@@ -91,6 +96,9 @@
 
 #define SubPinkLightColor               RGBOF(0xff80ab)         // 明亮辅助色,粉红色
 #define SubOrangeLightColor             RGBOF(0xff9e80)         // 明亮辅助色,橙色
+
+#define TextBrownColor                  RGBOF(0xFFAE6D)
+#define BrilliantredColor               RGBOF(0xFD20AC)
 
 #define TxtBackColor                    RGBOF(0x121213)         // 文字颜色,黑色
 #define TxtGrayColor                    RGBOF(0x7c7e86)         // 文字icon,浅灰

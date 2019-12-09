@@ -9,7 +9,6 @@
 #import "XOSettingManager.h"
 #import "XOFileManager.h"
 #import "XOMacro.h"
-#import "XOBaseConfig.h"
 #import "XOKeyChainTool.h"
 #import "NSBundle+XOBaseLib.h"
 #import <MJRefresh/MJRefreshConfig.h>
