@@ -10,12 +10,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+// 包类型
+typedef NS_ENUM(int, AppType) {
+    AppType_package_A = 1000,
+    AppType_package_B = 2000
+};
 
 @class XOBaseConfigModel;
 @interface XOBaseConfig : NSObject
 
 @property (nonatomic, strong, readonly) XOBaseConfigModel       *config;
-@property (nonatomic, copy, readonly) NSString                            *appTintColor;
+@property (nonatomic, assign) AppType                           appType;
+@property (nonatomic, copy, readonly) UIColor                   *appTintColor;
 
 + (instancetype)defaultConfig;
 
