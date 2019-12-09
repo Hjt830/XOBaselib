@@ -87,7 +87,7 @@
 
 /////////////////// App相关配色
 
-#define AppTintColor                    ([UIColor hexColor:([XOBaseConfig defaultConfig].appTintColor)])  // App主题色
+#define AppTintColor                    [XOBaseConfig defaultConfig].appTintColor  // App主题色
 
 #define MainPurpleColor                 RGBOF(0x7c4dff)         // 主色,紫色
 #define MainPurpleLightColor            RGBOF(0xb388ff)         // 明亮主色,紫色
