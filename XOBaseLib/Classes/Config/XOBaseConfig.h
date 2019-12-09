@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface XOBaseConfig : NSObject
 
 @property (nonatomic, strong, readonly) XOBaseConfigModel       *config;
-@property (nonatomic, strong) UIColor                           *appTintColor;
+@property (nonatomic, copy, readonly) NSString                            *appTintColor;
 
 + (instancetype)defaultConfig;
 

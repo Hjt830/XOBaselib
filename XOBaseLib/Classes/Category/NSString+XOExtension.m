@@ -11,6 +11,7 @@
 #import <CommonCrypto/CommonCrypto.h>
 #import <GTMBase64/GTMBase64.h>
 #import "sys/utsname.h"
+#include "stdio.h"
 
 @implementation NSString (XOExtension)
     
@@ -306,6 +307,23 @@
         return pinyin;
     }
     return [self lowercaseString];
+}
+
+// 十进制数字转十六进制字符串
+- (NSString *)stringWithHexNumber:(NSUInteger)hexNumber
+{
+    char hexChar[6];
+    sprintf(hexChar, "%x", (int)hexNumber);
+    NSString *hexString = [NSString stringWithCString:hexChar encoding:NSUTF8StringEncoding];
+    return hexString;
+}
+// 十六进制字符串转十进制数字
+- (NSInteger)numberWithHexString:(NSString *)hexString
+{
+    const char *hexChar = [hexString cStringUsingEncoding:NSUTF8StringEncoding];
+    int hexNumber;
+    sscanf(hexChar, "%x", &hexNumber);
+    return (NSInteger)hexNumber;
 }
 
 #pragma mark ========================= 获取设备名称 =========================

@@ -85,6 +85,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString * _Nonnull)pinyinString;
 
+// 十进制数字转十六进制字符串
+- (NSString *)stringWithHexNumber:(NSUInteger)hexNumber;
+// 十六进制字符串转十进制数字
+- (NSInteger)numberWithHexString:(NSString *)hexString;
+
 #pragma mark ========================= 获取设备名称 =========================
 
 + (NSString * _Nonnull)getDeviceName;

@@ -111,7 +111,7 @@
                 sureComplection ();
             }
         }];
-        [sure setValue:AppTinColor forKey:@"_titleTextColor"];
+        [sure setValue:AppTintColor forKey:@"_titleTextColor"];
         [alertVC addAction:sure];
     }
     if (!XOIsEmptyString(cancelTitle)) {
@@ -122,7 +122,7 @@
                 cancelComplection ();
             }
         }];
-        [cancel setValue:AppTinColor forKey:@"_titleTextColor"];
+        [cancel setValue:AppTintColor forKey:@"_titleTextColor"];
         [alertVC addAction:cancel];
     }
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{

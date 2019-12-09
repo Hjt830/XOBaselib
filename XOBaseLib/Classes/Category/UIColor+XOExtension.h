@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)XOBlackColor;
 
 
++ (UIColor *)hexColor:(NSString *)color;
 
 @end
 

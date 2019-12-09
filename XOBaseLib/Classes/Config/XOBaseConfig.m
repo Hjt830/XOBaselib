@@ -46,7 +46,7 @@ static XOBaseConfig *__baseConfig = nil;
     }
 }
 
-- (void)setAppTintColor:(UIColor *)appTintColor
+- (void)setAppTintColor:(NSString *)appTintColor
 {
     if (appTintColor) {
         [[NSUserDefaults standardUserDefaults] setObject:appTintColor forKey:@"XOAppTintColor"];
@@ -54,13 +54,13 @@ static XOBaseConfig *__baseConfig = nil;
     }
 }
 
-- (UIColor *)appTintColor
+- (NSString *)appTintColor
 {
-    UIColor *color = [[NSUserDefaults standardUserDefaults] objectForKey:@"XOAppTintColor"];
+    NSString *color = [[NSUserDefaults standardUserDefaults] objectForKey:@"XOAppTintColor"];
     if (color) {
         return color;
     }
-    return RGBOF(0x7c4dff);
+    return @"#7c4dff";
 }
 
 @end
