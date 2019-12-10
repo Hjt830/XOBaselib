@@ -11,9 +11,12 @@
 #import "NSBundle+XOBaseLib.h"
 #import "UIImage+XOBaseLib.h"
 #import "UIColor+XOExtension.h"
+#import "UIViewController+XOExtension.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import <AVFoundation/AVFoundation.h>
+#import <Photos/Photos.h>
 
-@interface XOBaseViewController () <UIGestureRecognizerDelegate>
+@interface XOBaseViewController () <UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, TZImagePickerControllerDelegate>
 {
     id <UIGestureRecognizerDelegate> _delegate;
 }
@@ -336,5 +339,202 @@
 {
     return self.navigationController.viewControllers.count > 1;
 }
+
+
+/**
+ *  显示照片选择
+ */
+- (void)showPickerPhotoInAlbum:(void(^)(void))albumComplection takePhotoInCamera:(void(^)(void))cameraComplection
+{
+    NSArray *actions = @[XOLocalizedString(@"action.title.photos"), XOLocalizedString(@"action.title.camera")];
+    [self showSheetWithTitle:nil message:nil actions:actions redIndex:nil complection:^(int index, NSString *title) {
+        if (0 == index) {
+            if (albumComplection) {
+                albumComplection();
+            }
+        }
+        else {
+            if (cameraComplection) {
+                cameraComplection();
+            }
+        }
+    } cancelComplection:nil];
+}
+
+/**
+ *  拍照
+ */
+- (void)takePhotoInCamera:(BOOL)allowEdit handler:(void(^)(NSDictionary <UIImagePickerControllerInfoKey,id> *info))cameraHandler
+{
+    AVAuthorizationStatus cameraAuth = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    // 已授权
+    if (AVAuthorizationStatusAuthorized == cameraAuth)
+    {
+        self.pickHandler = [cameraHandler copy];
+        [self openCamera:allowEdit];
+    }
+    // 请求授权
+    else if (AVAuthorizationStatusNotDetermined == cameraAuth) {
+        
+        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+            [self takePhotoInCamera:allowEdit handler:cameraHandler];
+        }];
+    }
+    // 拒绝授权 | 家长控制
+    else {
+        NSString *appName = [[NSBundle mainBundle].infoDictionary valueForKey:@"CFBundleDisplayName"];
+        NSString *message = [NSString stringWithFormat:XOLocalizedString(@"permission.setting.Camera.%@"), appName];
+        [self showAlertWithTitle:XOLocalizedString(@"tip.title") message:message sureTitle:XOLocalizedString(@"sure") cancelTitle:XOLocalizedString(@"cancel") sureComplection:^{
+            
+            [self openAppSetting];
+        } cancelComplection:NULL];
+    }
+}
+
+/**
+ *  选择单张照片
+ */
+- (void)pickSinglePicture:(BOOL)allowEdit handler:(UIImagePickControllerHandler)pickHandler
+{
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    // 已授权
+    if (PHAuthorizationStatusAuthorized == status)
+    {
+        self.pickHandler = [pickHandler copy];
+        [self openSystemAlbum:allowEdit];
+    }
+    // 请求授权
+    else if (PHAuthorizationStatusNotDetermined == status)
+    {
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            [self pickSinglePicture:allowEdit handler:pickHandler];
+        }];
+    }
+    // 拒绝授权 | 家长控制
+    else {
+        NSString *appName = [[NSBundle mainBundle].infoDictionary valueForKey:@"CFBundleDisplayName"];
+        NSString *message = [NSString stringWithFormat:XOLocalizedString(@"permission.setting.Photos.%@"), appName];
+        [self showAlertWithTitle:XOLocalizedString(@"tip.title") message:message sureTitle:XOLocalizedString(@"sure") cancelTitle:XOLocalizedString(@"cancel") sureComplection:^{
+            
+            [self openAppSetting];
+        } cancelComplection:NULL];
+    }
+}
+
+/**
+*  选择多张照片
+*/
+- (void)pickMultiplePicture:(int)maxCount handler:(TZImagePickControllerHandler)multiplePickHandler
+{
+    self.multiplePickHandler = [multiplePickHandler copy];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        TZImagePickerController *imagePicker = [[TZImagePickerController alloc] initWithMaxImagesCount:maxCount columnNumber:3 delegate:self];
+        imagePicker.statusBarStyle = UIStatusBarStyleLightContent;
+        imagePicker.maxImagesCount = maxCount;
+        imagePicker.videoMaximumDuration = 15;
+        // 2. 在这里设置imagePickerVc的外观
+        imagePicker.iconThemeColor = AppTintColor;
+        imagePicker.navigationBar.barTintColor = AppTintColor;
+        imagePicker.navigationBar.tintColor = [UIColor whiteColor];
+        imagePicker.oKButtonTitleColorDisabled = TextBrownColor;
+        imagePicker.oKButtonTitleColorNormal = AppTintColor;
+        // 3. 设置是否可以选择视频/图片/原图
+        imagePicker.allowPickingOriginalPhoto = YES;
+        // 4. 照片排列按修改时间升序
+        imagePicker.sortAscendingByModificationDate = YES;
+        // 5. 裁剪
+        imagePicker.allowCrop = YES;
+        imagePicker.scaleAspectFillCrop = YES;
+        imagePicker.cropRectPortrait = CGRectMake(0, (SCREEN_HEIGHT - SCREEN_WIDTH)/2.0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        // 6. 设置语言
+        XOLanguageName language = [XOSettingManager defaultManager].language;
+        if (!XOIsEmptyString(language) && [language isEqualToString:XOLanguageNameEn]) {
+            imagePicker.preferredLanguage = @"en";
+        } else {
+            imagePicker.preferredLanguage = @"zh-Hant";
+        }
+        imagePicker.allowPreview = YES;
+        imagePicker.allowPickingVideo = NO;
+        imagePicker.allowPickingImage = YES;
+        imagePicker.allowPickingMultipleVideo = NO;
+        imagePicker.allowTakePicture = NO;
+        imagePicker.allowTakeVideo = NO;
+        imagePicker.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self presentViewController:imagePicker animated:YES completion:NULL];
+    }];
+}
+
+// 拍照
+- (void)openCamera:(BOOL)allowEdit
+{
+    if([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+    {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear]) {
+                picker.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+            } else if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
+                picker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+            }
+            picker.delegate = self;
+            //设置拍照后的图片可被编辑
+            picker.allowsEditing = allowEdit;
+            picker.showsCameraControls = YES;
+            picker.modalPresentationStyle = UIModalPresentationFullScreen;
+            [self presentViewController:picker animated:YES completion:nil];
+        }];
+    }
+}
+
+// 打开相册
+- (void)openSystemAlbum:(BOOL)allowEdit
+{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.delegate = self;
+        picker.allowsEditing = allowEdit; // 设置拍照后的图片可被编辑
+        picker.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self presentViewController:picker animated:YES completion:nil];
+        
+        [UINavigationBar appearance].barTintColor = AppTintColor;
+        [UINavigationBar appearance].tintColor = [UIColor whiteColor];
+        [UINavigationBar appearance].translucent = NO;
+    }];
+}
+
+#pragma mark ========================= UIImagePickerControllerDelegate =========================
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info
+{
+    [UINavigationBar appearance].barTintColor = [UIColor XOWhiteColor];
+    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+    if (self.pickHandler) {
+        self.pickHandler(info);
+    }
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [UINavigationBar appearance].barTintColor = [UIColor XOWhiteColor];
+    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark ========================= TZImagePickerControllerDelegate =========================
+
+// 选择图片的回调
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto infos:(NSArray<NSDictionary *> *)infos
+{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+    if (self.multiplePickHandler) {
+        self.multiplePickHandler(photos, assets, isSelectOriginalPhoto, infos);
+    }
+}
+
 
 @end

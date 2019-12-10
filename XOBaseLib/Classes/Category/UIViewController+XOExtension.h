@@ -47,15 +47,19 @@ typedef NS_ENUM(NSInteger, XORequestAuthType) {
          cancelComplection:(void(^_Nullable)(void))cancelComplection;
 
 /**
- *  显示照片选择
- */
-- (void)showPickerPhoto:(void(^_Nullable)(void))takePicture
-           photoLibrary:(void(^_Nullable)(void))photoLibrary;
-
-/**
  *  提示打开权限
  */
 - (void)showAlertAuthor:(XORequestAuthType)authType;
+
+/**
+ *  显示照片选择
+ */
+- (void)showPickerPhotoInAlbum:(void(^)(void))albumComplection takePhotoInCamera:(void(^)(void))cameraComplection;
+
+/**
+*  打开app权限设置
+*/
+- (void)openAppSetting;
 
 @end
 

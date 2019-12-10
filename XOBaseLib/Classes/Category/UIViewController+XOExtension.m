@@ -70,6 +70,7 @@
             // 消失
             [alertVC dismissViewControllerAnimated:true completion:nil];
         }];
+        [action setValue:AppTintColor forKey:@"_titleTextColor"];
         [alertVC addAction:action];
     }
     
@@ -131,27 +132,6 @@
 }
 
 /**
- *  显示照片选择
- */
-- (void)showPickerPhoto:(void(^)(void))takePicture
-       photoLibrary:(void(^)(void))photoLibrary
-{
-    NSArray *actions = @[XOLocalizedString(@"action.title.photos"), XOLocalizedString(@"action.title.camera")];
-    [self showSheetWithTitle:nil message:nil actions:actions redIndex:nil complection:^(int index, NSString *title) {
-        if (0 == index) {
-            if (takePicture) {
-                takePicture();
-            }
-        }
-        else {
-            if (photoLibrary) {
-                photoLibrary();
-            }
-        }
-    } cancelComplection:nil];
-}
-
-/**
  *  显示申请权限
  */
 - (void)showAlertAuthor:(XORequestAuthType)authType
@@ -208,7 +188,8 @@
 {
     NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
     if (@available (iOS 10.0, *)) {
-        NSString * const  AppUniversalLinks = @"https://xxoolive.tv/*";
+        BOOL isAppTypeA = ([XOBaseConfig defaultConfig].appType == AppType_package_A);
+        NSString * const  AppUniversalLinks = isAppTypeA ? @"https://xxoogo.com/*" : @"https://xxoolive.tv/*";
         [[UIApplication sharedApplication] openURL:url options:@{UIApplicationOpenURLOptionUniversalLinksOnly:AppUniversalLinks} completionHandler:nil];
     } else {
         [[UIApplication sharedApplication] openURL:url];

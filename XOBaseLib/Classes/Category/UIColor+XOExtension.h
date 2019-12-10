@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (UIColor *)XOBlackColor;
 
++ (UIColor *)XOCellColor;
+
 
 + (UIColor *)hexColor:(NSString *)color;
 

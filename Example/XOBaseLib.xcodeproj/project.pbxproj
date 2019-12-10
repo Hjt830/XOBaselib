@@ -247,6 +247,10 @@
 				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = kenter;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = A8GN5C88ZP;
+						ProvisioningStyle = Manual;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -534,12 +538,16 @@
 			baseConfigurationReference = 32910EF006944546435DCB9D /* Pods-XOBaseLib_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhe Dai (B7F4N4Z9F7)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = A8GN5C88ZP;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XOBaseLib/XOBaseLib-Prefix.pch";
 				INFOPLIST_FILE = "XOBaseLib/XOBaseLib-Info.plist";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = test.xxoogo.base;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = profile_xxoogoTest_development;
 				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;
 			};
@@ -550,12 +558,15 @@
 			baseConfigurationReference = 066B869C6EEFF5DD5BFC2D2B /* Pods-XOBaseLib_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = A8GN5C88ZP;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XOBaseLib/XOBaseLib-Prefix.pch";
 				INFOPLIST_FILE = "XOBaseLib/XOBaseLib-Info.plist";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = test.xxoogo.base;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = profile_xxoogoTest_development;
 				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;
 			};

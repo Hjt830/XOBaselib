@@ -82,6 +82,23 @@
     return blackColor;
 }
 
++ (UIColor *)XOCellColor
+{
+    __block UIColor *cellColor = nil;
+    if (@available(iOS 13.0, *)) {
+        cellColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                return [UIColor systemGray5Color];
+            } else {
+                return [UIColor whiteColor];
+            }
+        }];
+    }
+    else {
+        cellColor = [UIColor whiteColor];
+    }
+    return cellColor;
+}
 
 
 
