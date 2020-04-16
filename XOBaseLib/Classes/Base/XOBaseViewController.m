@@ -12,9 +12,7 @@
 #import "UIImage+XOBaseLib.h"
 #import "UIColor+XOExtension.h"
 #import "UIViewController+XOExtension.h"
-#import <SVProgressHUD/SVProgressHUD.h>
 #import <AVFoundation/AVFoundation.h>
-#import <Photos/Photos.h>
 
 @interface XOBaseViewController () <UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, TZImagePickerControllerDelegate>
 {
@@ -88,15 +86,15 @@
         self.navigationController.interactivePopGestureRecognizer.delegate = self;
     }
     
-    // tabbarVC的基础控制器的导航栏置空
-    NSArray <UIViewController *>*viewControllers = self.tabBarController.viewControllers;
-    if (viewControllers.count > 0 && [viewControllers containsObject:self]) {
-        self.navigationItem.titleView = nil;
-        self.navigationItem.leftBarButtonItem = nil;
-        self.navigationItem.leftBarButtonItems = nil;
-        self.navigationItem.rightBarButtonItem = nil;
-        self.navigationItem.rightBarButtonItems = nil;
-    }
+//    // tabbarVC的基础控制器的导航栏置空
+//    NSArray <UIViewController *>*viewControllers = self.tabBarController.viewControllers;
+//    if (viewControllers.count > 0 && [viewControllers containsObject:self]) {
+//        self.navigationItem.titleView = nil;
+//        self.navigationItem.leftBarButtonItem = nil;
+//        self.navigationItem.leftBarButtonItems = nil;
+//        self.navigationItem.rightBarButtonItem = nil;
+//        self.navigationItem.rightBarButtonItems = nil;
+//    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -112,7 +110,6 @@
     }
     
     [self.view endEditing:YES];
-    [SVProgressHUD dismiss];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -120,7 +117,6 @@
     [super viewDidDisappear:animated];
     
     [self.view endEditing:YES];
-    [SVProgressHUD dismiss];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -239,12 +235,8 @@
         return;
     }
     
-    if (!self.navigationItem.leftBarButtonItem) {
-        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleDone target:self action:@selector(leftBBIDidClick:)];
-        self.navigationItem.leftBarButtonItem = bbi;
-    } else {
-        [self.navigationItem.leftBarButtonItem setTitle:title];
-    }
+    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleDone target:self action:@selector(leftBBIDidClick:)];
+    self.navigationItem.leftBarButtonItem = bbi;
 }
 
 - (void)setLeftBarButtonImage:(UIImage  * _Nonnull)image
@@ -254,12 +246,8 @@
         return;
     }
     
-    if (!self.navigationItem.leftBarButtonItem) {
-        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(leftBBIDidClick:)];
-        self.navigationItem.leftBarButtonItem = bbi;
-    } else {
-        [self.navigationItem.leftBarButtonItem setImage:image];
-    }
+    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(leftBBIDidClick:)];
+    self.navigationItem.leftBarButtonItem = bbi;
 }
 
 /**
@@ -272,12 +260,8 @@
         return;
     }
     
-    if (!self.navigationItem.rightBarButtonItem) {
-        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleDone target:self action:@selector(rightBBIDidClick:)];
-        self.navigationItem.rightBarButtonItem = bbi;
-    } else {
-        [self.navigationItem.rightBarButtonItem setTitle:title];
-    }
+    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleDone target:self action:@selector(rightBBIDidClick:)];
+    self.navigationItem.rightBarButtonItem = bbi;
 }
 
 - (void)setRightBarButtonImage:(UIImage * _Nonnull)image
@@ -287,12 +271,8 @@
         return;
     }
     
-    if (!self.navigationItem.rightBarButtonItem) {
-        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(rightBBIDidClick:)];
-        self.navigationItem.rightBarButtonItem = bbi;
-    } else {
-        [self.navigationItem.rightBarButtonItem setImage:image];
-    }
+    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(rightBBIDidClick:)];
+    self.navigationItem.rightBarButtonItem = bbi;
 }
 
 /**
@@ -339,28 +319,6 @@
 {
     return self.navigationController.viewControllers.count > 1;
 }
-
-
-/**
- *  显示照片选择
- */
-- (void)showPickerPhotoInAlbum:(void(^)(void))albumComplection takePhotoInCamera:(void(^)(void))cameraComplection
-{
-    NSArray *actions = @[XOLocalizedString(@"action.title.photos"), XOLocalizedString(@"action.title.camera")];
-    [self showSheetWithTitle:nil message:nil actions:actions redIndex:nil complection:^(int index, NSString *title) {
-        if (0 == index) {
-            if (albumComplection) {
-                albumComplection();
-            }
-        }
-        else {
-            if (cameraComplection) {
-                cameraComplection();
-            }
-        }
-    } cancelComplection:nil];
-}
-
 /**
  *  拍照
  */

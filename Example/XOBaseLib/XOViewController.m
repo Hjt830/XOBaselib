@@ -19,12 +19,13 @@
 {
     [super viewDidLoad];
 	
-    NSArray <NSString *>*arr = @[@"camera", @"pick", @"multiplePick"];
+    NSArray <NSString *>*arr = @[@"拍照", @"单张选择", @"多张选择"];
     for (int i = 0; i < arr.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake((self.view.width - 120.0)/2.0, 150 + 120 * i, 120, 56);
-        [button setTitleColor:[UIColor XOTextColor] forState:UIControlStateNormal];
+        button.frame = CGRectMake((self.view.width - 120.0)/2.0, 150 + 80 * i, 120, 56);
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button setTitle:arr[i] forState:UIControlStateNormal];
+        [button setBackgroundColor:RGBOF(0xFC0000)];
         [button addTarget:self action:@selector(pick:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:button];
         button.tag = i;

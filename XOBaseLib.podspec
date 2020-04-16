@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XOBaseLib'
-  s.version          = '1.0'
+  s.version          = '1.2'
   s.summary          = 'XXOOGO项目的基础模块'
 
 # This description is used to generate tags and improve search results.
@@ -43,9 +43,8 @@ XXOOGO项目采用cocoapods做组件化架构，将不同的模块使用pod私�
   s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'AFNetworking'
   s.dependency 'SDWebImage'
-  s.dependency 'GTMBase64', '~> 1.0.1'
-  s.dependency 'MJRefresh', '~> 3.2.0'
-  s.dependency 'SVProgressHUD', '~> 2.2.5'
-  s.dependency 'TZImagePickerController', '~> 3.2.1'
+  s.dependency 'GTMBase64'
+  s.dependency 'MJRefresh'
+  s.dependency 'TZImagePickerController'
   
 end

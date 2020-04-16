@@ -108,6 +108,8 @@ static XOUserDefault * __userDefault = nil;
         XOLog(@"key不能为空");
         return;
     }
+    // 处理字典中的一些空值null
+    data = [self handlerData:data];
     
     [XOUF setObject:data forKey:[key lowerMD5String_32]];
     [XOUF synchronize];
@@ -137,6 +139,28 @@ static XOUserDefault * __userDefault = nil;
     
     [XOUF removeObjectForKey:[key lowerMD5String_32]];
     [XOUF synchronize];
+}
+
+#pragma mark ================ help ================
+
+- (id)handlerData:(id)data
+{
+    // 处理字典中的一些空值
+    if ([data isKindOfClass:[NSDictionary class]]) {
+        NSMutableDictionary *dict = [(NSDictionary *)data mutableCopy];
+        [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            if ([obj isEqual:[NSNull null]]) {
+                [dict setValue:nil forKey:key];
+            }
+            else if ([obj isKindOfClass:[NSDictionary class]]) {
+                id value = [self handlerData:obj];
+                [dict setValue:value forKey:key];
+            }
+        }];
+        
+        return dict;
+    }
+    return data;
 }
 
 @end

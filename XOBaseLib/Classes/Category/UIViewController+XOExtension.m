@@ -184,13 +184,31 @@
     }
 }
 
+/**
+ *  显示照片选择
+ */
+- (void)showPickerPhotoInAlbum:(void(^)(void))albumComplection takePhotoInCamera:(void(^)(void))cameraComplection
+{
+    NSArray *actions = @[XOLocalizedString(@"action.title.photos"), XOLocalizedString(@"action.title.camera")];
+    [self showSheetWithTitle:nil message:nil actions:actions redIndex:nil complection:^(int index, NSString *title) {
+        if (0 == index) {
+            if (albumComplection) {
+                albumComplection();
+            }
+        }
+        else {
+            if (cameraComplection) {
+                cameraComplection();
+            }
+        }
+    } cancelComplection:nil];
+}
+
 - (void)openAppSetting
 {
     NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
     if (@available (iOS 10.0, *)) {
-        BOOL isAppTypeA = ([XOBaseConfig defaultConfig].appType == AppType_package_A);
-        NSString * const  AppUniversalLinks = isAppTypeA ? @"https://xxoogo.com/*" : @"https://xxoolive.tv/*";
-        [[UIApplication sharedApplication] openURL:url options:@{UIApplicationOpenURLOptionUniversalLinksOnly:AppUniversalLinks} completionHandler:nil];
+        [[UIApplication sharedApplication] openURL:url options:@{UIApplicationOpenURLOptionUniversalLinksOnly:@"https://baidu.com/*"} completionHandler:nil];
     } else {
         [[UIApplication sharedApplication] openURL:url];
     }
