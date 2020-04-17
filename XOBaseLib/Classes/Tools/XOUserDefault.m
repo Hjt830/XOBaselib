@@ -146,7 +146,8 @@ static XOUserDefault * __userDefault = nil;
 - (id)handlerData:(id)data
 {
     // 处理字典中的一些空值
-    if ([data isKindOfClass:[NSDictionary class]]) {
+    if ([data isKindOfClass:[NSDictionary class]])
+    {
         NSMutableDictionary *dict = [(NSDictionary *)data mutableCopy];
         [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
             if ([obj isEqual:[NSNull null]]) {
@@ -160,6 +161,19 @@ static XOUserDefault * __userDefault = nil;
         
         return dict;
     }
+    else if ([data isKindOfClass:[NSArray class]])
+    {
+        NSMutableArray *array = [(NSArray *)data mutableCopy];
+        [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:[NSDictionary class]]) {
+                id value = [self handlerData:obj];
+                [array replaceObjectAtIndex:idx withObject:value];
+            }
+        }];
+        
+        return array;
+    }
+    
     return data;
 }
 

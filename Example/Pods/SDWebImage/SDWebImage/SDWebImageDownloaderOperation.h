@@ -42,9 +42,6 @@
 @end
 
 
-/**
- The download operation class for SDWebImageDownloader.
- */
 @interface SDWebImageDownloaderOperation : NSOperation <SDWebImageDownloaderOperation>
 
 /**

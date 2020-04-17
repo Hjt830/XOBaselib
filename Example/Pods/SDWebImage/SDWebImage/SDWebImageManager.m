@@ -11,7 +11,6 @@
 #import "SDWebImageDownloader.h"
 #import "UIImage+Metadata.h"
 #import "SDWebImageError.h"
-#import "SDInternalMacros.h"
 
 static id<SDImageCache> _defaultImageCache;
 static id<SDImageLoader> _defaultImageLoader;
@@ -403,11 +402,8 @@ static id<SDImageLoader> _defaultImageLoader;
     if (mutableContext.count == 0) {
         return context;
     } else {
-        if (context) {
-            [mutableContext addEntriesFromDictionary:context];
-            return [mutableContext copy];
-        }
-        return context;
+        [mutableContext addEntriesFromDictionary:context];
+        return [mutableContext copy];
     }
 }
 

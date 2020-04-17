@@ -98,7 +98,6 @@ inline UIImage * _Nullable SDScaledImageForScaleFactor(CGFloat scale, UIImage * 
         if (bitmapImageRep) {
             NSSize size = NSMakeSize(image.size.width / scale, image.size.height / scale);
             animatedImage = [[NSImage alloc] initWithSize:size];
-            bitmapImageRep.size = size;
             [animatedImage addRepresentation:bitmapImageRep];
         }
 #endif

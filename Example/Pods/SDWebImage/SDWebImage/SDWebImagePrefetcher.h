@@ -11,9 +11,6 @@
 
 @class SDWebImagePrefetcher;
 
-/**
- A token represents a list of URLs, can be used to cancel the download.
- */
 @interface SDWebImagePrefetchToken : NSObject <SDWebImageOperation>
 
 /**
@@ -28,9 +25,6 @@
 
 @end
 
-/**
- The prefetcher delegate protocol
- */
 @protocol SDWebImagePrefetcherDelegate <NSObject>
 
 @optional

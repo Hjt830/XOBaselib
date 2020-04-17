@@ -8,9 +8,6 @@
 
 #import "SDWebImageCompat.h"
 
-/**
- UIImage category for memory cache cost.
- */
 @interface UIImage (MemoryCacheCost)
 
 /**

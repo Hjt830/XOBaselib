@@ -10,10 +10,8 @@
 
 #if SD_UIKIT || SD_MAC
 
-/**
- A protocol to custom the indicator during the image loading.
- All of these methods are called from main queue.
- */
+// A protocol to custom the indicator during the image loading
+// All of these methods are called from main queue
 @protocol SDWebImageIndicator <NSObject>
 
 @required
@@ -23,12 +21,10 @@
  @return The indicator view
  */
 @property (nonatomic, strong, readonly, nonnull) UIView *indicatorView;
-
 /**
  Start the animating for indicator.
  */
 - (void)startAnimatingIndicator;
-
 /**
  Stop the animating for indicator.
  */
@@ -46,11 +42,9 @@
 
 #pragma mark - Activity Indicator
 
-/**
- Activity indicator class.
- for UIKit(macOS), it use a `UIActivityIndicatorView`.
- for AppKit(macOS), it use a `NSProgressIndicator` with the spinning style.
- */
+// Activity indicator class
+// for UIKit(macOS), it use a `UIActivityIndicatorView`
+// for AppKit(macOS), it use a `NSProgressIndicator` with the spinning style
 @interface SDWebImageActivityIndicator : NSObject <SDWebImageIndicator>
 
 #if SD_UIKIT
@@ -61,9 +55,7 @@
 
 @end
 
-/**
- Convenience way to use activity indicator.
- */
+// Convenience way to use activity indicator.
 @interface SDWebImageActivityIndicator (Conveniences)
 
 /// gray-style activity indicator
@@ -79,11 +71,9 @@
 
 #pragma mark - Progress Indicator
 
-/**
- Progress indicator class.
- for UIKit(macOS), it use a `UIProgressView`.
- for AppKit(macOS), it use a `NSProgressIndicator` with the bar style.
- */
+// Progress indicator class
+// for UIKit(macOS), it use a `UIProgressView`
+// for AppKit(macOS), it use a `NSProgressIndicator` with the bar style
 @interface SDWebImageProgressIndicator : NSObject <SDWebImageIndicator>
 
 #if SD_UIKIT
@@ -94,9 +84,7 @@
 
 @end
 
-/**
- Convenience way to create progress indicator. Remember to specify the indicator width or use layout constraint if need.
- */
+// Convenience way to create progress indicator. Remember to specify the indicator width or use layout constraint if need.
 @interface SDWebImageProgressIndicator (Conveniences)
 
 /// default-style progress indicator

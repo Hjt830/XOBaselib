@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "SDWebImageCompat.h"
 
-/// Image Cache Expire Type
 typedef NS_ENUM(NSUInteger, SDImageCacheConfigExpireType) {
     /**
      * When the image is accessed it will update this value
@@ -21,10 +20,7 @@ typedef NS_ENUM(NSUInteger, SDImageCacheConfigExpireType) {
     SDImageCacheConfigExpireTypeModificationDate
 };
 
-/**
- The class contains all the config for image cache
- @note This class conform to NSCopying, make sure to add the property in `copyWithZone:` as well.
- */
+// This class conform to NSCopying, make sure to add the property in `copyWithZone:` as well.
 @interface SDImageCacheConfig : NSObject <NSCopying>
 
 /**
@@ -75,7 +71,7 @@ typedef NS_ENUM(NSUInteger, SDImageCacheConfigExpireType) {
  * The maximum length of time to keep an image in the disk cache, in seconds.
  * Setting this to a negative value means no expiring.
  * Setting this to zero means that all cached files would be removed when do expiration check.
- * Defaults to 1 week.
+ * Defaults to 1 weak.
  */
 @property (assign, nonatomic) NSTimeInterval maxDiskAge;
 

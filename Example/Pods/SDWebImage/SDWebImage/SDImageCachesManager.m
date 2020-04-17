@@ -9,7 +9,6 @@
 #import "SDImageCachesManager.h"
 #import "SDImageCachesManagerOperation.h"
 #import "SDImageCache.h"
-#import "SDInternalMacros.h"
 
 @interface SDImageCachesManager ()
 
