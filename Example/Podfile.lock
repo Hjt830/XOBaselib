@@ -15,12 +15,12 @@ PODS:
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - GTMBase64 (1.0.1)
-  - MJRefresh (3.1.16)
+  - MJRefresh (3.5.0)
   - SDWebImage (5.0.1):
     - SDWebImage/Core (= 5.0.1)
   - SDWebImage/Core (5.0.1)
   - TZImagePickerController (3.2.0)
-  - XOBaseLib (1.2):
+  - XOBaseLib (1.3):
     - AFNetworking
     - GTMBase64
     - MJRefresh
@@ -45,10 +45,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   GTMBase64: f0f91be06a7a20b84c8e4fee30c0430395091d82
-  MJRefresh: 7798e16e53a5ef7f332dd05b27664db4e29530fd
+  MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
   SDWebImage: 27dd2c9ea07a2252f94557c9fbb6105ee94b74c9
   TZImagePickerController: 7850b158d025065b162a1a963d445040b828abc9
-  XOBaseLib: 771da83245d82b68cafa85e3fbf49e56328ce9cf
+  XOBaseLib: 0c85ff9ea7bdb2be994a9cc086f41441cc2688ad
 
 PODFILE CHECKSUM: 81f1da12640a476b8e66120a8c37b78432daec84
 
