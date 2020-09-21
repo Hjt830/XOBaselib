@@ -31,7 +31,8 @@ typedef NS_ENUM(NSInteger, XORequestAuthType) {
  */
 - (void)showSheetWithTitle:(NSString * _Nullable)title
                    message:(NSString * _Nullable)message
-                   actions:(NSArray <NSString *> * _Nonnull)actions
+                   actions:(NSArray <NSString *> * _Nullable)actions
+               cancelTitle:(NSString * _Nullable)cancelTitle
                   redIndex:(NSNumber * _Nullable)redIndex
                complection:(void(^_Nullable)(int index, NSString * _Nullable title))complection
          cancelComplection:(void(^_Nullable)(void))cancelComplection;
@@ -45,6 +46,17 @@ typedef NS_ENUM(NSInteger, XORequestAuthType) {
                cancelTitle:(NSString * _Nullable)cancelTitle
            sureComplection:(void(^_Nullable)(void))sureComplection
          cancelComplection:(void(^_Nullable)(void))cancelComplection;
+
+/**
+ *  带输入框的弹框
+ */
+- (void)showAlertWithTitle:(NSString * _Nullable)title
+                   message:(NSString * _Nullable)message
+                 sureTitle:(NSString * _Nullable)sureTitle
+               cancelTitle:(NSString * _Nullable)cancelTitle
+           sureComplection:(void(^ _Nullable)(NSString * _Nullable inputStr))sureComplection
+         cancelComplection:(void(^ _Nullable)(NSString * _Nullable inputStr))cancelComplection
+                 textField:(void(^ _Nullable)(UITextField * _Nonnull textField))inputHanlder;
 
 /**
  *  提示打开权限

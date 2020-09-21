@@ -45,16 +45,17 @@
  *  选择框 sheet
  */
 - (void)showSheetWithTitle:(NSString * _Nullable)title
-               message:(NSString * _Nullable)message
-               actions:(NSArray <NSString *> * _Nonnull)actions
-              redIndex:(NSNumber * _Nullable)redIndex
-           complection:(void(^)(int index, NSString *title))complection
-     cancelComplection:(void(^)(void))cancelComplection
+                   message:(NSString * _Nullable)message
+                   actions:(NSArray <NSString *> * _Nullable)actions
+               cancelTitle:(NSString * _Nullable)cancelTitle
+                  redIndex:(NSNumber * _Nullable)redIndex
+               complection:(void(^_Nullable)(int index, NSString * _Nullable title))complection
+         cancelComplection:(void(^_Nullable)(void))cancelComplection
 {
-    if (XOIsEmptyArray(actions)) {
-        XOLog(@"actions不能都为空");
-        return;
-    }
+//    if (XOIsEmptyArray(actions)) {
+//        XOLog(@"actions不能都为空");
+//        return;
+//    }
     
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleActionSheet];
     
@@ -70,11 +71,11 @@
             // 消失
             [alertVC dismissViewControllerAnimated:true completion:nil];
         }];
-        [action setValue:AppTintColor forKey:@"_titleTextColor"];
+//        [action setValue:AppTintColor forKey:@"_titleTextColor"];
         [alertVC addAction:action];
     }
     
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:XOLocalizedString(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         if (cancelComplection) {
             cancelComplection();
         }
@@ -83,8 +84,12 @@
     }];
     [alertVC addAction:cancelAction];
     // show
-    [self presentViewController:alertVC animated:YES completion:^{
-        
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        if (nil != self.navigationController) {
+            [self.navigationController presentViewController:alertVC animated:YES completion:nil];
+        } else {
+            [self presentViewController:alertVC animated:YES completion:nil];
+        }
     }];
 }
 
@@ -105,7 +110,7 @@
     
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     if (!XOIsEmptyString(sureTitle)) {
-        UIAlertAction *sure = [UIAlertAction actionWithTitle:sureTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *sure = [UIAlertAction actionWithTitle:sureTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [alertVC dismissViewControllerAnimated:YES completion:nil];
             
             if (sureComplection) {
@@ -116,7 +121,7 @@
         [alertVC addAction:sure];
     }
     if (!XOIsEmptyString(cancelTitle)) {
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [alertVC dismissViewControllerAnimated:YES completion:nil];
             
             if (cancelComplection) {
@@ -127,61 +132,65 @@
         [alertVC addAction:cancel];
     }
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [self presentViewController:alertVC animated:YES completion:nil];
+        if (nil != self.navigationController) {
+            [self.navigationController presentViewController:alertVC animated:YES completion:nil];
+        } else {
+            [self presentViewController:alertVC animated:YES completion:nil];
+        }
     }];
 }
 
 /**
- *  显示申请权限
+ *  带输入框的弹框
  */
-- (void)showAlertAuthor:(XORequestAuthType)authType
+- (void)showAlertWithTitle:(NSString * _Nullable)title
+                   message:(NSString * _Nullable)message
+                 sureTitle:(NSString * _Nullable)sureTitle
+               cancelTitle:(NSString * _Nullable)cancelTitle
+           sureComplection:(void(^ _Nullable)(NSString * _Nullable inputStr))sureComplection
+         cancelComplection:(void(^ _Nullable)(NSString * _Nullable inputStr))cancelComplection
+                 textField:(void(^ _Nullable)(UITextField * _Nonnull textField))inputHanlder
 {
-    NSString *tips = XOLocalizedString(@"tip.title");
-    NSString *sure = XOLocalizedString(@"sure");
-    NSString *cancel = XOLocalizedString(@"cancel");
-    NSString *appname = [[NSBundle mainBundle].infoDictionary valueForKey:@"CFBundleDisplayName"];
-    // 相机
-    if (XORequestAuthCamera == authType) {
-        NSString *message = [NSString stringWithFormat:XOLocalizedString(@"permission.setting.Camera.%@"), appname];
-        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:cancel sureComplection:^{
-            [self openAppSetting];
-        } cancelComplection:nil];
+    if (XOIsEmptyString(sureTitle) && XOIsEmptyString(cancelTitle)) {
+        NSLog(@"sureTitle 和 cancelTitle 不能都为空");
+        return;
     }
-    // 相册
-    else if (XORequestAuthPhotos == authType) {
-        NSString *message = [NSString stringWithFormat:XOLocalizedString(@"permission.setting.Photos.%@"), appname];
-        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:cancel sureComplection:^{
-            [self openAppSetting];
-        } cancelComplection:nil];
+    
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alertVC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        if (inputHanlder) {
+            inputHanlder(textField);
+        }
+    }];
+    if (!XOIsEmptyString(sureTitle)) {
+        UIAlertAction *sure = [UIAlertAction actionWithTitle:sureTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            if (sureComplection) {
+                sureComplection (alertVC.textFields.firstObject.text);
+            }
+            [alertVC dismissViewControllerAnimated:YES completion:nil];
+            [alertVC.textFields.firstObject resignFirstResponder];
+        }];
+        [sure setValue:AppTintColor forKey:@"_titleTextColor"];
+        [alertVC addAction:sure];
     }
-    // 定位
-    else if (XORequestAuthLocation == authType) {
-        NSString *message = [NSString stringWithFormat:XOLocalizedString(@"permission.setting.Location.%@"), appname];
-        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:cancel sureComplection:^{
-            [self openAppSetting];
-        } cancelComplection:nil];
+    if (!XOIsEmptyString(cancelTitle)) {
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if (cancelComplection) {
+                cancelComplection (alertVC.textFields.firstObject.text);
+            }
+            [alertVC.textFields.firstObject resignFirstResponder];
+            [alertVC dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [cancel setValue:AppTintColor forKey:@"_titleTextColor"];
+        [alertVC addAction:cancel];
     }
-    // 麦克风
-    else if (XORequestAuthMicphone == authType) {
-        NSString *message = [NSString stringWithFormat:XOLocalizedString(@"permission.setting.Micphone.%@"), appname];
-        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:cancel sureComplection:^{
-            [self openAppSetting];
-        } cancelComplection:nil];
-    }
-    // 通讯录
-    else if (XORequestAuthAddressBook == authType) {
-        NSString *message = [NSString stringWithFormat:XOLocalizedString(@"permission.setting.AddressBook.%@"), appname];
-        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:cancel sureComplection:^{
-            [self openAppSetting];
-        } cancelComplection:nil];
-    }
-    // 通知
-    else if (XORequestAuthNotification == authType) {
-        NSString *message =[NSString stringWithFormat:XOLocalizedString(@"permission.setting.Notification.%@"), appname];
-        [self showAlertWithTitle:tips message:message sureTitle:sure cancelTitle:cancel sureComplection:^{
-            [self openAppSetting];
-        } cancelComplection:nil];
-    }
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        if (nil != self.navigationController) {
+            [self.navigationController presentViewController:alertVC animated:YES completion:nil];
+        } else {
+            [self presentViewController:alertVC animated:YES completion:nil];
+        }
+    }];
 }
 
 /**
@@ -190,7 +199,7 @@
 - (void)showPickerPhotoInAlbum:(void(^)(void))albumComplection takePhotoInCamera:(void(^)(void))cameraComplection
 {
     NSArray *actions = @[XOLocalizedString(@"action.title.photos"), XOLocalizedString(@"action.title.camera")];
-    [self showSheetWithTitle:nil message:nil actions:actions redIndex:nil complection:^(int index, NSString *title) {
+    [self showSheetWithTitle:nil message:nil actions:actions cancelTitle:XOLocalizedString(@"cancel") redIndex:nil complection:^(int index, NSString *title) {
         if (0 == index) {
             if (albumComplection) {
                 albumComplection();
